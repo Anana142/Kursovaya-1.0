@@ -90,33 +90,49 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Height="50" Width="325" Text="Абонемент" Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Height="50" Width="325" Content="Абонемент" Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="2" BorderBrush="#8E5701"/>
+
+            <Border  Grid.Row="1" Grid.Column="0"  Width="325" BorderThickness="2 0 0 2" BorderBrush="#8E5701" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
 
-            
-                <StackPanel Grid.Row="1" Grid.Column="0" Height="auto" Width="auto">
-                    <TextBlock Height="20" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="80" Text="Клиент: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="65" Width="80" Text="Дата начала: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="80" Text="График: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="80" Text="Статус: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="100" Text="Всего посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="130" Text="Осталось посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="80" Text="Цена: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1" Height="auto" Width="auto">
-                    <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <ListBox Height="65" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                    <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                </StackPanel>
+                    <StackPanel  Grid.Column="0" Height="auto" Width="auto">
+                        <TextBlock Height="20" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="80" Text="Клиент: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="65" Width="80" Text="Дата начала: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="80" Text="График: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="80" Text="Статус: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="100" Text="Всего посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="130" Text="Осталось посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="80" Text="Цена: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel  Grid.Column="1" Height="auto" Width="auto">
+                        <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <ListBox Height="65" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text=" " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                    </StackPanel>
 
-            <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 0 0 0" Content="Добавить посещение"/>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение"/>
 
+                </Grid>
+            </Border>
+
+
+
+           
         </Grid>
 
 

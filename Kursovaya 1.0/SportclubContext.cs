@@ -37,11 +37,13 @@ public partial class SportclubContext : DbContext
 
     public virtual DbSet<Subscription> Subscriptions { get; set; }
 
+    public virtual DbSet<Subscriptionservice> Subscriptionservices { get; set; }
+
     public virtual DbSet<Worker> Workers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;password=Craz200gise;database=sportclub;characterset=utf8mb4", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=Craz200gise;database=sportclub", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -135,7 +137,6 @@ public partial class SportclubContext : DbContext
                 .ToTable("posts")
                 .UseCollation("utf8mb4_unicode_ci");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Post1)
                 .HasMaxLength(255)
                 .HasColumnName("Post");
@@ -151,7 +152,7 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdSubscription, "FK_sale_IdSubscription");
 
-            entity.HasIndex(e => e.IdWorker, "FK_sale_IdWorker");
+            entity.HasIndex(e => e.IdWorker, "FK_sale_IdWorker2");
 
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Sum).HasPrecision(10, 2);
@@ -162,7 +163,7 @@ public partial class SportclubContext : DbContext
 
             entity.HasOne(d => d.IdWorkerNavigation).WithMany(p => p.Sales)
                 .HasForeignKey(d => d.IdWorker)
-                .HasConstraintName("FK_sale_IdWorker");
+                .HasConstraintName("FK_sale_IdWorker2");
         });
 
         modelBuilder.Entity<Service>(entity =>
@@ -194,9 +195,9 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdGraph, "FK_ServiceWorkersGraph_IdGraph");
 
-            entity.HasIndex(e => e.IdService, "FK_ServiceWorkersGraph_IdService");
+            entity.HasIndex(e => e.IdService, "FK_serviceworkersgraph_IdService2");
 
-            entity.HasIndex(e => e.IdWorker, "FK_ServiceWorkersGraph_IdWorker");
+            entity.HasIndex(e => e.IdWorker, "FK_serviceworkersgraph_IdWorker2");
 
             entity.HasOne(d => d.IdGraphNavigation).WithMany(p => p.Serviceworkersgraphs)
                 .HasForeignKey(d => d.IdGraph)
@@ -204,11 +205,11 @@ public partial class SportclubContext : DbContext
 
             entity.HasOne(d => d.IdServiceNavigation).WithMany(p => p.Serviceworkersgraphs)
                 .HasForeignKey(d => d.IdService)
-                .HasConstraintName("FK_ServiceWorkersGraph_IdService");
+                .HasConstraintName("FK_serviceworkersgraph_IdService2");
 
             entity.HasOne(d => d.IdWorkerNavigation).WithMany(p => p.Serviceworkersgraphs)
                 .HasForeignKey(d => d.IdWorker)
-                .HasConstraintName("FK_ServiceWorkersGraph_IdWorker");
+                .HasConstraintName("FK_serviceworkersgraph_IdWorker2");
         });
 
         modelBuilder.Entity<Subscription>(entity =>
@@ -246,6 +247,25 @@ public partial class SportclubContext : DbContext
                 .HasConstraintName("FK_Subscription_IdServiceWorkerGraph");
         });
 
+        modelBuilder.Entity<Subscriptionservice>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("subscriptionservice");
+
+            entity.HasIndex(e => e.IdService, "FK_subscriptionservice_IdService2");
+
+            entity.HasIndex(e => e.IdSubscrirtion, "FK_subscriptionservice_IdSubscrirtion");
+
+            entity.HasOne(d => d.IdServiceNavigation).WithMany()
+                .HasForeignKey(d => d.IdService)
+                .HasConstraintName("FK_subscriptionservice_IdService2");
+
+            entity.HasOne(d => d.IdSubscrirtionNavigation).WithMany()
+                .HasForeignKey(d => d.IdSubscrirtion)
+                .HasConstraintName("FK_subscriptionservice_IdSubscrirtion");
+        });
+
         modelBuilder.Entity<Worker>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -254,9 +274,8 @@ public partial class SportclubContext : DbContext
                 .ToTable("workers")
                 .UseCollation("utf8mb4_unicode_ci");
 
-            entity.HasIndex(e => e.IdPost, "FK_workers_IdPost");
+            entity.HasIndex(e => e.IdPost, "FK_workers_IdPost2");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.Gender).HasMaxLength(255);
             entity.Property(e => e.Login).HasMaxLength(255);
@@ -271,7 +290,7 @@ public partial class SportclubContext : DbContext
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Workers)
                 .HasForeignKey(d => d.IdPost)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_workers_IdPost");
+                .HasConstraintName("FK_workers_IdPost2");
         });
 
         OnModelCreatingPartial(modelBuilder);

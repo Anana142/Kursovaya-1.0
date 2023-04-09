@@ -55,4 +55,20 @@ public partial class Subscription
         {
             return DataBase.GetInstance().Services.FirstOrDefault(s => s.Id == this.IdServices.First().IdService).Title;
         } }
+
+   public int UsedVisits { get
+        {
+            return TotalVisits - Attendances.Count;
+        } }
+
+    public string Price { get {
+
+            decimal price = (decimal)DataBase.GetInstance().Services.FirstOrDefault(s => s.Id == this.IdServices.First().IdService).PricePerHour;
+
+            decimal discount = (decimal)this.IdDiscountNavigation.Size / 100;
+
+            price = price - (price * discount);
+
+            return price.ToString() + " руб.";
+        } }
 }

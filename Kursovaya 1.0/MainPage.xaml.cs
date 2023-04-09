@@ -32,6 +32,7 @@ namespace Kursovaya_1._0
         public string servtitle { get; set; }
         public string ServiceTitle { get; set; }
         public List<Graph> GraphicsView { get; set; } 
+        public int UsedVisit { get; set; }
         
         
         public Subscription Selected { get => selected; set { selected = value; Signal(); } }
@@ -39,8 +40,8 @@ namespace Kursovaya_1._0
         {
             InitializeComponent();
 
-            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.IdServices).ToList();
-            
+            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.IdServices).Include(s => s.Attendances).Include(s => s.IdDiscountNavigation).ToList();
+           
 
              DataContext = this;
 

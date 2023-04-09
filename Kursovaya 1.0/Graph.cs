@@ -14,4 +14,9 @@ public partial class Graph
     public TimeOnly? EndTime { get; set; }
 
     public virtual ICollection<Serviceworkersgraph> Serviceworkersgraphs { get; } = new List<Serviceworkersgraph>();
+
+    public override string ToString()
+    {
+        return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();
+    }
 }

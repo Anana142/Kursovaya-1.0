@@ -19,5 +19,5 @@ public partial class Serviceworkersgraph
 
     public virtual Worker? IdWorkerNavigation { get; set; }
 
-    public virtual ICollection<Subscription> Subscriptions { get; } = new List<Subscription>();
+    public virtual ICollection<Subscription> IdSubscrirtions { get; } = new List<Subscription>();
 }

@@ -37,13 +37,11 @@ public partial class SportclubContext : DbContext
 
     public virtual DbSet<Subscription> Subscriptions { get; set; }
 
-    public virtual DbSet<Subscriptionservice> Subscriptionservices { get; set; }
-
     public virtual DbSet<Worker> Workers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=Craz200gise;database=sportclub", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;user=root;password=Craz200gise;database=sportclub", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -222,8 +220,6 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdPeriod, "FK_Subscription_IdPeriod");
 
-            entity.HasIndex(e => e.IdServiceWorkerGraph, "FK_Subscription_IdServiceWorkerGraph");
-
             entity.HasIndex(e => e.IdClient, "FK_subscription_IdClient");
 
             entity.HasIndex(e => e.IdDiscount, "FK_subscription_IdDiscount");
@@ -242,28 +238,25 @@ public partial class SportclubContext : DbContext
                 .HasForeignKey(d => d.IdPeriod)
                 .HasConstraintName("FK_Subscription_IdPeriod");
 
-            entity.HasOne(d => d.IdServiceWorkerGraphNavigation).WithMany(p => p.Subscriptions)
-                .HasForeignKey(d => d.IdServiceWorkerGraph)
-                .HasConstraintName("FK_Subscription_IdServiceWorkerGraph");
-        });
-
-        modelBuilder.Entity<Subscriptionservice>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("subscriptionservice");
-
-            entity.HasIndex(e => e.IdService, "FK_subscriptionservice_IdService2");
-
-            entity.HasIndex(e => e.IdSubscrirtion, "FK_subscriptionservice_IdSubscrirtion");
-
-            entity.HasOne(d => d.IdServiceNavigation).WithMany()
-                .HasForeignKey(d => d.IdService)
-                .HasConstraintName("FK_subscriptionservice_IdService2");
-
-            entity.HasOne(d => d.IdSubscrirtionNavigation).WithMany()
-                .HasForeignKey(d => d.IdSubscrirtion)
-                .HasConstraintName("FK_subscriptionservice_IdSubscrirtion");
+            entity.HasMany(d => d.IdServices).WithMany(p => p.IdSubscrirtions)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Subscriptionservice",
+                    r => r.HasOne<Serviceworkersgraph>().WithMany()
+                        .HasForeignKey("IdService")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_subscriptionservice_IdService2"),
+                    l => l.HasOne<Subscription>().WithMany()
+                        .HasForeignKey("IdSubscrirtion")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_subscriptionservice_IdSubscrirtion"),
+                    j =>
+                    {
+                        j.HasKey("IdSubscrirtion", "IdService")
+                            .HasName("PRIMARY")
+                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                        j.ToTable("subscriptionservice");
+                        j.HasIndex(new[] { "IdService" }, "FK_subscriptionservice_IdService2");
+                    });
         });
 
         modelBuilder.Entity<Worker>(entity =>

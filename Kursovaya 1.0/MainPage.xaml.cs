@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,17 +21,37 @@ namespace Kursovaya_1._0
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : Page, INotifyPropertyChanged
     {
-        public DataBase DataBase { get; set; } = new DataBase();    
+        private Subscription selected;
+
+        public DataBase DataBase { get; set; } = new DataBase();
         public List<Subscription> ListSubscriptions { get; set; }
+
+
+        public string servtitle { get; set; }
+        public string ServiceTitle { get; set; }
+        public List<Graph> GraphicsView { get; set; } 
+        
+        
+        public Subscription Selected { get => selected; set { selected = value; Signal(); } }
         public MainPage()
         {
             InitializeComponent();
 
-            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.ToList();
+            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.IdServices).ToList();
+            
 
-            DataContext = this;
+             DataContext = this;
+
+
+
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        void Signal([CallerMemberName] string prop = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

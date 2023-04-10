@@ -59,7 +59,6 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdSubscription, "FK_attendance_IdSubscription");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Date).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdSubscriptionNavigation).WithMany(p => p.Attendances)

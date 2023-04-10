@@ -25,5 +25,14 @@ namespace Kursovaya_1._0
 
             return worker;
         }
+
+        public void AddVisit(int id)
+        {
+            Attendance attendance = new Attendance();
+            attendance.Id = id;
+            attendance.Date = DateTime.Now;
+
+            DataBase.GetInstance().Attendances.Add(attendance);
+        }
     }
 }

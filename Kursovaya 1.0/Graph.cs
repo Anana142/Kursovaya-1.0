@@ -17,6 +17,6 @@ public partial class Graph
 
     public override string ToString()
     {
-        return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();
+        return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();   
     }
 }

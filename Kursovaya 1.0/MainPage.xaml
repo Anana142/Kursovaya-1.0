@@ -316,7 +316,7 @@
 
                         <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#432818"/>
                 <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="100" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
-                        <Button Height="20" Width="20"  Margin="20 60 0 0"/>
+                        <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver"/>
 
             </StackPanel>
 

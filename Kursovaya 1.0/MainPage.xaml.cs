@@ -30,7 +30,7 @@ namespace Kursovaya_1._0
         private List<Subscription> listSubscriptions;
 
         public DataBase DataBase { get; set; } = new DataBase();
-        public List<Subscription> ListSubscriptions { get => listSubscriptions; set => listSubscriptions = value; }
+        public List<Subscription> ListSubscriptions { get => listSubscriptions; set { listSubscriptions = value; Signal(); } }
 
         public List<string> SortingList { get; set; } = new List<string>() { "Нет сортировки", "Сортировка по Фамилии клиента", "Сортировка по активности", "Сортировка по Услуге" };
 
@@ -93,34 +93,6 @@ namespace Kursovaya_1._0
             DataBase.GetInstance().SaveChanges();
             Signal(nameof(Selected));
         }
-
-
-        /*private void Search()
-        {
-            var result = DB.GetInstance().Products.
-                Include(s => s.IdProviderNavigation).
-                Include(s => s.IdManufacturerNavigation).
-                Include(s => s.IdCategoryNavigation).Where(s =>
-                    s.IdProviderNavigation.Title.Contains(searchText) ||
-                    s.IdManufacturerNavigation.Title.Contains(searchText) ||
-                    s.Article.Contains(searchText) ||
-                    s.IdCategoryNavigation.Title.Contains(searchText) ||
-                    s.ProductDiscription.Contains(searchText) ||
-                    s.Title.Contains(searchText)
-                );
-            if (SelectedManufacturer.Id != 0)
-                result = result.Where(s => s.IdManufacturer == SelectedManufacturer.Id);
-            if (SelectedSort == 2)
-                result = result.OrderByDescending(s => s.Cost);
-            else if (SelectedSort == 1)
-                result = result.OrderBy(s => s.Cost);
-            DataProduct = result.ToList();
-
-        
-            Signal(nameof(CountProducts));
-            Signal(nameof(DataProduct));
-        }*/
-
         private void Search()
         {
             List<Subscription> list = new List<Subscription>();
@@ -144,6 +116,10 @@ namespace Kursovaya_1._0
             Signal(nameof(ListSubscriptions));
         }
 
+        private void TurnOver(object sender, RoutedEventArgs e)
+        {
+            ListSubscriptions.Reverse();
+        }
 
     }
 }

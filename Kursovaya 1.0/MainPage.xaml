@@ -363,7 +363,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Height="35" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Margin="0 45 0 0" Grid.Row="2" VerticalAlignment="Top" />
+                    <Button Height="35" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Margin="0 45 0 0" Grid.Row="2" VerticalAlignment="Top" Click="AddSub" />
 
         <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Margin="0 50 0 0" Width="325" HorizontalAlignment="Right" >
             <Grid.ColumnDefinitions>

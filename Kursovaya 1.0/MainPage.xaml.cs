@@ -85,13 +85,16 @@ namespace Kursovaya_1._0
 
         private void Visit(object sender, RoutedEventArgs e)
         {
-            Attendance attendance = new Attendance();
-            attendance.IdSubscription = Selected.Id;
-            attendance.Date = DateTime.Now;
+            if (Selected != null)
+            {
+                Attendance attendance = new Attendance();
+                attendance.IdSubscription = Selected.Id;
+                attendance.Date = DateTime.Now;
 
-            DataBase.GetInstance().Attendances.Add(attendance);
-            DataBase.GetInstance().SaveChanges();
-            Signal(nameof(Selected));
+                DataBase.GetInstance().Attendances.Add(attendance);
+                DataBase.GetInstance().SaveChanges();
+                Signal(nameof(Selected));
+            }
         }
         private void Search()
         {
@@ -121,5 +124,9 @@ namespace Kursovaya_1._0
             ListSubscriptions.Reverse();
         }
 
+        private void AddSub(object sender, RoutedEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new NewSubscription();
+        }
     }
 }

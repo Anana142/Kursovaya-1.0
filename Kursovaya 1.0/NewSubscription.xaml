@@ -11,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="365"/>
+            <ColumnDefinition Width="455"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -30,9 +30,13 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Height="auto">
+            <StackPanel Height="auto" Grid.RowSpan="2">
                 <TextBlock Text="Клиент: " FontSize="15" Height="25"  Margin="0 0 0 10" />
                 <TextBlock Text="Услуга: " FontSize="15" Height="25" Margin="0 0 0 10"/>
                 <TextBlock Text="Период: " FontSize="15" Height="25" Margin="0 0 0 10"/>
@@ -42,16 +46,33 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
-                <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
-                    <TextBlock />
-                </Border>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+               
 
-                <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10">
-                    <TextBlock />
-                </Border>
-                <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15"/>
-                <CheckBox HorizontalAlignment="Left" Margin="10 0 0 20"/>
+                <StackPanel Grid.Column="0">
+                    <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding ClientName}" Padding="3 0 0 0" FontSize="15"/>
+                    </Border>
+
+                    <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10">
+                        <TextBlock />
+                    </Border>
+                    <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15" Background="Black" BorderBrush="White"/>
+                    <CheckBox HorizontalAlignment="Left" Margin="10 0 0 20"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="Button_Click"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5"/>
+                </StackPanel>
+            </Grid>
+                
+           
+            <StackPanel Grid.Column="1" Grid.Row="1">
                 <ListBox Height="165" Width="325" Margin="0 0 0 15"/>
                 <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Margin="0 0 0 10"  Width="160" HorizontalAlignment="Left" >
                     <TextBlock />
@@ -61,6 +82,79 @@
         </Grid>
 
         <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
+        
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorder" Visibility="Collapsed">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Выбрать клиента" VerticalAlignment="Top" Height="50" Width="455"  Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="0 0 0 2" BorderBrush="#8E5701" Grid.Row="0"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <TextBlock Text="Поиск:" Margin="40 35 0 0" FontSize="12" Foreground="#432818" Height="25" VerticalAlignment="Top"/>
+                    <TextBox Height="25" Width="160" VerticalAlignment="Top" Margin="10 35 0 0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Новый" FontSize="10" Margin="5 38 0 5" VerticalAlignment="Top" Click="AddNewClient"/>
+                </StackPanel>
+
+                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding ClientList}" SelectedItem="{Binding SelectedClient}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="95" Header="Фамилия" Binding="{Binding SurName}"/>
+                        <DataGridTextColumn Width="95" Header="Имя" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Width="95" Header="Отчество" Binding="{Binding Patronymic}"/>
+                        <DataGridTextColumn Width="97" Header="Дата рождения"  Binding="{Binding Birthday}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddClientName"/>
+
+            </Grid>
+            
+            
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="NewClientBorder" Visibility="Collapsed" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Новый клиент" VerticalAlignment="Top" Height="50" Width="455"  Foreground="#432818" Padding="10 25 0 5" FontSize="15" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="0 0 0 2" BorderBrush="#8E5701"/>
+
+                <Grid Grid.Row="1" Margin="0 15 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Фамилия: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                        <TextBlock Text="Имя: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                        <TextBlock Text="Отчество: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                        <TextBlock Text="Телефон: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                        <TextBlock Text="Дата рождения: " FontSize="15" Margin="10 10 0 10" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                        <TextBlock Text="Пол: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                </Grid>
+
+                <Button Grid.Row="2" Content="Сохранить" Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+            </Grid>
+        </Border>
+            
 
     </Grid>
 </Page>

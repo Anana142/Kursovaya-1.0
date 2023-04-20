@@ -39,8 +39,8 @@
             <StackPanel Height="auto" Grid.RowSpan="2">
                 <TextBlock Text="Клиент: " FontSize="15" Height="25"  Margin="0 0 0 10" />
                 <TextBlock Text="Услуга: " FontSize="15" Height="25" Margin="0 0 0 10"/>
-                <TextBlock Text="Период: " FontSize="15" Height="25" Margin="0 0 0 10"/>
                 <TextBlock Text="Тренер: " FontSize="15" Height="25" Margin="0 0 0 10"/>
+                <TextBlock Text="Период: " FontSize="15" Height="25" Margin="0 0 0 10"/>
                 <TextBlock Text="График: " FontSize="15" Height="25" Margin="0 0 0 163"/>
                 <TextBlock Text="Цена: " FontSize="15" Height="25" Margin="0 0 0 10"/>
 
@@ -55,19 +55,23 @@
 
                 <StackPanel Grid.Column="0">
                     <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
-                        <TextBlock Text="{Binding ClientName}" Padding="3 0 0 0" FontSize="15"/>
+                        <TextBlock Text="{Binding ClientName}" Padding="3 0 0 0" FontSize="14"/>
                     </Border>
 
                     <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10">
-                        <TextBlock />
+                        <TextBlock Text="{Binding ServieTitle}" Padding="3 0 0 0" FontSize="14"/>
                     </Border>
-                    <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15" Background="Black" BorderBrush="White"/>
-                    <CheckBox HorizontalAlignment="Left" Margin="10 0 0 20"/>
+                    <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
+                        <TextBlock Text="{Binding WorkerName}" Padding="3 0 0 0" FontSize="14"/>
+                    </Border>
+                    <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15" Background="Black" BorderBrush="White" ItemsSource="{Binding PeriodList}" DisplayMemberPath="Duration"/>
+                   
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="Button_Click"/>
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="ChooseClient"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseService"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseWorker"/>
                 </StackPanel>
             </Grid>
                 
@@ -140,21 +144,90 @@
                         <TextBlock Text="Дата рождения: " FontSize="15" Margin="10 10 0 10" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
                         <TextBlock Text="Пол: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1">
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
-                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Column="1" >
+                        <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.SurName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox  x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox  x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox  x:Name="Birthday" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox  x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Gender, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                 </Grid>
 
-                <Button Grid.Row="2" Content="Сохранить" Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                <Button Grid.Row="2" Content="Сохранить" Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" Click="AddNewClientInClientList" x:Name="SaveNewClient" />
             </Grid>
         </Border>
-            
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorderService" Visibility="Collapsed">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Выбрать услугу" VerticalAlignment="Top" Height="50" Width="455"  Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="0 0 0 2" BorderBrush="#8E5701" Grid.Row="0"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <TextBlock Text="Поиск:" Margin="40 35 0 0" FontSize="12" Foreground="#432818" Height="25" VerticalAlignment="Top"/>
+                    <TextBox Height="25" Width="160" VerticalAlignment="Top" Margin="10 35 0 0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                </StackPanel>
+
+                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding SelectedService}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="95" Header="Название" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Width="95" Header="Всего человек" Binding="{Binding NumberOfPersons}"/>
+                        <DataGridTextColumn Width="97" Header="Цена за час"  Binding="{Binding PricePerHour}"/>
+                        <DataGridTextColumn Width="97" Header="Описание"  Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddServiceTitle"/>
+
+            </Grid>
+
+
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorderWorker" Visibility="Collapsed">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Выбрать тренера" VerticalAlignment="Top" Height="50" Width="455"  Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="0 0 0 2" BorderBrush="#8E5701" Grid.Row="0"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <TextBlock Text="Поиск:" Margin="40 35 0 0" FontSize="12" Foreground="#432818" Height="25" VerticalAlignment="Top"/>
+                    <TextBox Height="25" Width="160" VerticalAlignment="Top" Margin="10 35 0 0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+                </StackPanel>
+
+                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding WorkerList}" SelectedItem="{Binding SelectedWorker}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="95" Header="Фамилия" Binding="{Binding Surname}"/>
+                        <DataGridTextColumn Width="95" Header="Имя" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Width="97" Header="Отчество"  Binding="{Binding Patronymic}"/>
+                        <DataGridTextColumn Width="97" Header="Дата рождения"  Binding="{Binding Birthday}"/>
+                    </DataGrid.Columns> 
+                </DataGrid>
+
+                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddWorkerName"/>
+
+            </Grid>
+
+
+        </Border>
+
+
 
     </Grid>
 </Page>

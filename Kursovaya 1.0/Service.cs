@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kursovaya_1._0;
 
@@ -20,4 +21,7 @@ public partial class Service
     public virtual Branch? IdBranchNavigation { get; set; }
 
     public virtual ICollection<Serviceworkersgraph> Serviceworkersgraphs { get; } = new List<Serviceworkersgraph>();
+
+    
 }
+

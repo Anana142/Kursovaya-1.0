@@ -13,3 +13,4 @@ public partial class Subscriptionservice
 
     public virtual Subscription? IdSubscrirtionNavigation { get; set; }
 }
+           

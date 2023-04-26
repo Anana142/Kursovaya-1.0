@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Http.Headers;
 
 namespace Kursovaya_1._0;
 
@@ -19,4 +21,6 @@ public partial class Graph
     {
         return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();   
     }
+
+   
 }

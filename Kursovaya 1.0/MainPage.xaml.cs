@@ -122,6 +122,8 @@ namespace Kursovaya_1._0
         private void TurnOver(object sender, RoutedEventArgs e)
         {
             ListSubscriptions.Reverse();
+            Signal(nameof(ListSubscriptions));
+            MyDataGrid.Items.Refresh(); 
         }
 
         private void AddSub(object sender, RoutedEventArgs e)

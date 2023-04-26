@@ -24,35 +24,49 @@ namespace Kursovaya_1._0
     public partial class NewSubscription : Page, INotifyPropertyChanged
     {
         private List<Client> clientList;
-        private string clientName;
         private string searchText = "";
-        private List<Service> serviceList;
-        private string servieTitle;
-        private List<Worker> workerList;
+        private List<Service> serviceList = new List<Service>();
+        private List<Worker> workerList = new List<Worker>();
         private Worker selectedWorker;
-        private string workerName;
         private Client newClient = new Client() { Name = "", SurName = "", Patronymic = "" };
         private string birthdayNewClient = "";
+        private List<Serviceworkersgraph> graphList;
+        private Service selectedService;
+        private Service addSelectedService;
+        private Worker addSelectedWorker;
+        private List<Service> addServiceList;
+        private List<Worker> addWorkerList;
+        private Client addClientName;
+        private Serviceworkersgraph selectedGraph;
+        private List<Serviceworkersgraph> addGraphList = new List<Serviceworkersgraph>();
 
         public List<Client> ClientList { get => clientList; set { clientList = value; Signal(); } }
         public List<Service> ServiceList { get => serviceList; set { serviceList = value; Signal(); } }
+        public List<Service> AddServiceList { get => addServiceList; set { addServiceList = value; Signal(); } }
         public List<Worker> WorkerList { get => workerList; set { workerList = value; Signal(); } }
+        public List<Worker> AddWorkerList { get => addWorkerList; set { addWorkerList = value; Signal(); } }
+        public List<Serviceworkersgraph> GraphList { get => graphList; set { graphList = value; Signal(); } }
 
         public List<Period> PeriodList { get; set; }
 
         public Client SelectedClient { get; set; }
-        public string ClientName { get => clientName; set { clientName = value; Signal(); } }
+        public Client AddClient { get => addClientName; set { addClientName = value; Signal(); } }
+        public Service SelectedService { get => selectedService; set { selectedService = value; Signal(); } }
 
-        public Service SelectedService { get; set; }
-        public string ServieTitle { get => servieTitle; set { servieTitle = value; Signal(); } }
-
+        public Service AddSelectedService { get => addSelectedService; set { addSelectedService = value; Signal(); } }
         public Worker SelectedWorker { get => selectedWorker; set { selectedWorker = value; Signal(); } }
-        public string WorkerName { get => workerName; set { workerName = value; Signal(); } }
+        public Worker AddSelectedWorker { get => addSelectedWorker; set { addSelectedWorker = value; Signal(); } }
+
+        public Serviceworkersgraph SelectedGraph { get => selectedGraph; set { selectedGraph = value; Signal(); } }
+        public List<Serviceworkersgraph> AddGraphList { get => addGraphList; set { addGraphList = value; Signal(); } }
 
         public string SearchText { get => searchText; set { searchText = value; Search(); } }
         public Client NewClient { get => newClient; set { newClient = value; Signal(); } }
-        public string BirthdayNewClient { get => birthdayNewClient; set { birthdayNewClient = value; SpelledCorrectly(); } }
-
+        public string BirthdayNewClient { get => birthdayNewClient; set { birthdayNewClient = value; SpelledCorrectly(); Signal(); } }
+        public int SelectedIndexCombobox { get; set; } 
+        public Serviceworkersgraph RemoveFromListBox { get; set; }
+        public decimal Price { get; set; } 
+       
         public NewSubscription()
         {
             InitializeComponent();
@@ -62,6 +76,7 @@ namespace Kursovaya_1._0
 
         private void Search()
         {
+
             if (MyBorder.Visibility == Visibility)
             {
                 var result = DataBase.GetInstance().Clients.
@@ -71,24 +86,50 @@ namespace Kursovaya_1._0
                      );
                 ClientList = result.ToList();
 
+
                 Signal(nameof(ClientList));
             }
             else if (MyBorderService.Visibility == Visibility)
             {
-                var result = DataBase.GetInstance().Services.
-                    Where(s => s.Title.Contains(SearchText));
-                ServiceList = result.ToList();
-                Signal(nameof(ServiceList));
+                if (AddSelectedWorker != null)
+                {
+                    AddServiceList = ServiceList;
+                    var res = AddServiceList.Where(s => s.Title.Contains(SearchText));
+                    AddServiceList = res.ToList();
+                    Signal(nameof(AddServiceList));
+                }
+                else if (AddSelectedWorker == null)
+                {
+                    var result = DataBase.GetInstance().Services.
+                        Where(s => s.Title.Contains(SearchText));
+                    ServiceList = result.ToList();
+                    AddServiceList = ServiceList;
+                    Signal(nameof(AddServiceList));
+                }
             }
             else if (MyBorderWorker.Visibility == Visibility)
             {
-                var result = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && (
-                s.Name.Contains(SearchText) ||
-                s.Surname.Contains(SearchText) ||
-                s.Patronymic.Contains(SearchText))
-                );
-                WorkerList = result.ToList();
-                Signal(nameof(WorkerList));
+                if (AddSelectedService == null)
+                {
+                    var result = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && (
+                    s.Name.Contains(SearchText) ||
+                    s.Surname.Contains(SearchText) ||
+                    s.Patronymic.Contains(SearchText))
+                    );
+                    WorkerList = result.ToList();
+                    Signal(nameof(WorkerList));
+                }
+                else if (AddSelectedService != null)
+                {
+                    AddWorkerList = WorkerList;
+                    var res = AddWorkerList.Where(s => s.IdPost == 2 && (
+                   s.Name.Contains(SearchText) ||
+                   s.Surname.Contains(SearchText) ||
+                   s.Patronymic.Contains(SearchText))
+                   );
+                    AddWorkerList = res.ToList();
+                    Signal(nameof(AddWorkerList));
+                }
             }
         }
 
@@ -99,6 +140,7 @@ namespace Kursovaya_1._0
             MyBorder.Visibility = Visibility.Visible;
             MyBorderService.Visibility = Visibility.Collapsed;
             MyBorderWorker.Visibility = Visibility.Collapsed;
+            MyBorderGraph.Visibility = Visibility.Collapsed;
 
         }
 
@@ -111,8 +153,8 @@ namespace Kursovaya_1._0
 
         private void AddClientName(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient != null)
-                ClientName = SelectedClient.SurName.ToString() + " " + SelectedClient.Name.ToString();
+            AddClient = SelectedClient;
+
         }
 
         private void AddNewClient(object sender, RoutedEventArgs e)
@@ -121,36 +163,105 @@ namespace Kursovaya_1._0
             NewClientBorder.Visibility = Visibility.Visible;
             MyBorderService.Visibility = Visibility.Collapsed;
             MyBorderWorker.Visibility = Visibility.Collapsed;
+            MyBorderGraph.Visibility = Visibility.Collapsed;
         }
 
         private void ChooseService(object sender, RoutedEventArgs e)
         {
-            ServiceList = DataBase.GetInstance().Services.ToList();
             NewClientBorder.Visibility = Visibility.Collapsed;
             MyBorder.Visibility = Visibility.Collapsed;
             MyBorderWorker.Visibility = Visibility.Collapsed;
             MyBorderService.Visibility = Visibility.Visible;
+            MyBorderGraph.Visibility = Visibility.Collapsed;
+
+            ServiceList = new List<Service>();
+
+            List<Serviceworkersgraph> swg = new List<Serviceworkersgraph>();
+
+            if (AddSelectedWorker == null)
+            {
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).ToList();
+
+
+                foreach (var serv in swg)
+                {
+                    if (ServiceList.Count == 0 || ServiceList.FirstOrDefault(s => s.Id == serv.IdService) == null)
+                    {
+                        ServiceList.Add(serv.IdServiceNavigation);
+                        AddServiceList = ServiceList;
+                    }
+                }
+
+                SelectedService = AddSelectedService;
+            }
+            else if (AddSelectedWorker != null)
+            {
+
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdWorker == AddSelectedWorker.Id).ToList(); // если щелкать кнопки выбрать тут ошибка
+
+                foreach (var serv in swg)
+                {
+                    if (ServiceList.Count == 0 || ServiceList.FirstOrDefault(s => s.Id == serv.IdService) == null)
+                    {
+                        ServiceList.Add(serv.IdServiceNavigation);
+                        AddServiceList = ServiceList;
+                    }
+                }
+            }
+            MyDataGridService.Items.Refresh();
         }
 
         private void AddServiceTitle(object sender, RoutedEventArgs e)
         {
-            if (SelectedService != null)
-                ServieTitle = SelectedService.Title;
+            AddSelectedService = SelectedService;
         }
 
         private void ChooseWorker(object sender, RoutedEventArgs e)
         {
-            WorkerList = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2).ToList();
+
             NewClientBorder.Visibility = Visibility.Collapsed;
             MyBorder.Visibility = Visibility.Collapsed;
             MyBorderService.Visibility = Visibility.Collapsed;
             MyBorderWorker.Visibility = Visibility.Visible;
+            MyBorderGraph.Visibility = Visibility.Collapsed;
+
+            WorkerList = new List<Worker>();
+
+            List<Serviceworkersgraph> swg = new List<Serviceworkersgraph>();
+
+            if (AddSelectedService == null)
+            {
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation).ToList();
+
+                foreach (var serv in swg)
+                {
+                    if (WorkerList.Count == 0 || WorkerList.FirstOrDefault(s => s.Id == serv.IdWorker) == null)
+                    {
+                        WorkerList.Add(serv.IdWorkerNavigation);
+                        AddWorkerList = WorkerList;
+                    }
+                }
+            }
+            else if (AddSelectedService != null)
+            {
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdService == AddSelectedService.Id).ToList();
+
+                foreach (var serv in swg)
+                {
+                    if (WorkerList.Count == 0 || WorkerList.FirstOrDefault(s => s.Id == serv.IdWorker) == null)
+                    {
+                        WorkerList.Add(serv.IdWorkerNavigation);
+                        AddWorkerList = WorkerList;
+                    }
+                }
+            }
+
+            MyDataGridWorker.Items.Refresh();
         }
 
         private void AddWorkerName(object sender, RoutedEventArgs e)
         {
-            if (SelectedWorker != null)
-                WorkerName = SelectedWorker.Surname + " " + SelectedWorker.Name;
+            AddSelectedWorker = SelectedWorker;
         }
 
         private void AddNewClientInClientList(object sender, RoutedEventArgs e)
@@ -164,11 +275,11 @@ namespace Kursovaya_1._0
 
                 MessageBox.Show("Клиент добавлен");
 
-                NewClient = new Client() { Name = "", SurName = "", Patronymic = "" };
+                NewClient = new Client() { Name = "", SurName = "", Patronymic = "", Birthday = null };
                 BirthdayNewClient = "";
             }
             else
-                MessageBox.Show("ghkghhjkjkl");
+                MessageBox.Show("Ошибка :(");
 
 
         }
@@ -177,7 +288,7 @@ namespace Kursovaya_1._0
         {
             DateOnly data;
 
-            if(DateOnly.TryParse(BirthdayNewClient, out data))
+            if (DateOnly.TryParse(BirthdayNewClient, out data))
             {
                 Birthday.Foreground = new SolidColorBrush(Colors.Black);
                 SaveNewClient.IsEnabled = true;
@@ -187,6 +298,149 @@ namespace Kursovaya_1._0
                 Birthday.Foreground = new SolidColorBrush(Colors.Red);
                 SaveNewClient.IsEnabled = false;
             }
+        }
+
+        private void ChooseGraph(object sender, RoutedEventArgs e)
+        {
+
+
+            if (AddSelectedService == null)
+                MessageBox.Show("Необходимо выбрать услугу");
+            else
+            {
+                MyBorderGraph.Visibility = Visibility.Visible;
+                NewClientBorder.Visibility = Visibility.Collapsed;
+                MyBorder.Visibility = Visibility.Collapsed;
+                MyBorderService.Visibility = Visibility.Collapsed;
+                MyBorderWorker.Visibility = Visibility.Collapsed;
+
+                List<Serviceworkersgraph> list = new List<Serviceworkersgraph>();
+                if (AddSelectedWorker != null && AddSelectedService != null)
+                {
+
+                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id && s.IdWorker == AddSelectedWorker.Id).ToList();
+                    foreach (var graph in GraphList)
+                    {
+                        if (graph.IdServiceNavigation.NumberOfPersons > graph.Busy)
+                        {
+                            list.Add(graph);
+                        }
+                    }
+
+                }
+                else if (AddSelectedService != null)
+                {
+                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id).ToList();
+                    foreach (var graph in GraphList)
+                    {
+                        if (graph.IdServiceNavigation.NumberOfPersons > graph.Busy)
+                        {
+                            list.Add(graph);
+                        }
+                    }
+                }
+                GraphList = list;
+
+            }
+        }
+
+        private void AddGraph(object sender, RoutedEventArgs e)
+        {
+            if (SelectedIndexCombobox != 0)
+            {
+                if (SelectedGraph != null)
+                {
+                    if (AddGraphList.Count() == 0 || AddGraphList.FirstOrDefault(s => s.Id == SelectedGraph.Id) == null)
+                    {
+                        AddGraphList.Add(SelectedGraph);
+                        Signal(nameof(AddGraphList));
+                        ListBoxGraph.Items.Refresh();
+                        RemoveGraphButton.Visibility = Visibility.Visible;
+                        
+                    }
+                }
+            }
+            else 
+            {
+                if(AddGraphList.Count < 1)
+                {
+                    AddGraphList.Add(SelectedGraph);
+                    Signal(nameof(AddGraphList));
+                    ListBoxGraph.Items.Refresh();
+                    RemoveGraphButton.Visibility = Visibility.Visible;
+                }
+            }
+            PriceMaker();
+}
+
+        private void RemoveGraph(object sender, RoutedEventArgs e)
+        {
+            if (RemoveFromListBox != null)
+            {
+                AddGraphList.Remove(RemoveFromListBox);
+                ListBoxGraph.Items.Refresh();
+            }
+            if (AddGraphList.Count == 0)
+                RemoveGraphButton.Visibility = Visibility.Collapsed;
+            PriceMaker();
+        }
+
+        public void PriceMaker()
+        {
+            if(SelectedWorker != null && SelectedService != null) {
+
+                int CountWeek = 0;
+
+                if (SelectedIndexCombobox == 0)
+                    CountWeek = 1;
+                else
+                {
+                    CountWeek = PeriodList[SelectedIndexCombobox].Duration / 7;
+                }
+
+                Price = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek ;
+                Signal(nameof(Price));
+
+            }
+        }
+        public DateOnly DateOnlyNow()
+        {
+            string dataTime = DateTime.Now.ToString();
+
+            string[] dataAndTime = dataTime.Split(' ');
+
+            DateOnly data = DateOnly.Parse(dataAndTime[0]);
+
+            return data; }
+            private void AddSubscription(object sender, RoutedEventArgs e)
+        {
+            if(AddSelectedService != null && AddSelectedWorker != null && AddClient != null && AddGraphList.Count() != 0)
+            {
+                int CountWeek = 0;
+
+                if (SelectedIndexCombobox == 0)
+                    CountWeek = 1;
+                else
+                {
+                    CountWeek = PeriodList[SelectedIndexCombobox].Duration / 7;
+                }
+
+                Subscription sub = new Subscription()
+                {
+                    IdClient = AddClient.Id,
+                    IdPeriod = PeriodList[SelectedIndexCombobox].Id,
+                    TotalVisits = AddGraphList.Count() * CountWeek,
+                    StartDate = DateOnlyNow(),
+                    Status = "Активен"
+                };
+                DataBase.GetInstance().Subscriptions.Add(sub);
+                DataBase.GetInstance().SaveChanges();
+                
+                Subscription last =  DataBase.GetInstance().Subscriptions.Include(s => s.IdServices).OrderBy(s => s.Id).Last();
+               
+
+            }
+
         }
     }
 }

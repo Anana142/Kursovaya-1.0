@@ -34,5 +34,6 @@ namespace Kursovaya_1._0
 
             DataBase.GetInstance().Attendances.Add(attendance);
         }
-    }
+
+      }
 }

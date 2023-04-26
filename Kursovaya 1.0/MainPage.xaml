@@ -316,7 +316,7 @@
 
                         <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#432818"/>
                 <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="100" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
-                        <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver"/>
+                        <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver" />
 
             </StackPanel>
 
@@ -340,7 +340,7 @@
 
 
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Margin="0 50 0 0" SelectedItem="{Binding Selected}"  HorizontalAlignment="Left" Grid.Column="0" ItemsSource="{Binding ListSubscriptions}" Width="635" Height="420" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Margin="0 50 0 0" SelectedItem="{Binding Selected}"  HorizontalAlignment="Left" Grid.Column="0" ItemsSource="{Binding ListSubscriptions}" Width="635" Height="420" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}" x:Name="MyDataGrid">
                         <DataGrid.Columns>
                            
                          <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*"/>

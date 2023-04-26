@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -48,48 +48,61 @@
 
             <Grid Grid.Column="1" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="161"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-               
+
 
                 <StackPanel Grid.Column="0">
                     <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
-                        <TextBlock Text="{Binding ClientName}" Padding="3 0 0 0" FontSize="14"/>
+                        <TextBlock Text="{Binding AddClient.SurName}" Padding="3 0 0 0" FontSize="14" />
                     </Border>
 
                     <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10">
-                        <TextBlock Text="{Binding ServieTitle}" Padding="3 0 0 0" FontSize="14"/>
+                        <TextBlock Text="{Binding AddSelectedService.Title}" Padding="3 0 0 0" FontSize="14"/>
                     </Border>
                     <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 10" >
-                        <TextBlock Text="{Binding WorkerName}" Padding="3 0 0 0" FontSize="14"/>
+                        <TextBlock Text="{Binding AddSelectedWorker.Surname}" Padding="3 0 0 0" FontSize="14"/>
                     </Border>
-                    <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15" Background="Black" BorderBrush="White" ItemsSource="{Binding PeriodList}" DisplayMemberPath="Duration"/>
-                   
+                    <ComboBox Height="25" Width="160"  HorizontalAlignment="Left" Margin="0 0 0 15" Background="Black" BorderBrush="White" ItemsSource="{Binding PeriodList}" DisplayMemberPath="Duration" SelectedIndex="{Binding SelectedIndexCombobox}"/>
+
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
                     <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="ChooseClient"/>
                     <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseService"/>
                     <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseWorker"/>
+
                 </StackPanel>
             </Grid>
-                
-           
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <ListBox Height="165" Width="325" Margin="0 0 0 15"/>
-                <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Margin="0 0 0 10"  Width="160" HorizontalAlignment="Left" >
-                    <TextBlock />
+
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="83.57"/>
+                    <ColumnDefinition Width="241.43"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <ListBox Height="165" Width="325" Margin="0 0 0 15" HorizontalAlignment="Left" Visibility="Visible" x:Name="ListBoxGraph" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding AddGraphList}" DisplayMemberPath="IdGraphNavigation" Grid.ColumnSpan="2" SelectedItem="{Binding RemoveFromListBox}"/>
+                <Border BorderBrush="#8E5701" BorderThickness="1" Height="25" Margin="0,1,0,10"  Width="160" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+                    <TextBlock Text="{Binding Price}" />
                 </Border>
-            </StackPanel>
+                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="15,0,0,0" Click="ChooseGraph" x:Name="ButtonGraph" Visibility="Visible" VerticalAlignment="Top" Grid.Column="2"/>
+                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="15 ,30,0,0" Click="RemoveGraph" x:Name="RemoveGraphButton" Visibility="Collapsed" VerticalAlignment="Top" Grid.Column="2"/>
+            </Grid>
 
         </Grid>
 
-        <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        
-        
+        <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddSubscription"/>
+
+
         <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorder" Visibility="Collapsed">
-            
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -118,8 +131,8 @@
                 <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddClientName"/>
 
             </Grid>
-            
-            
+
+
         </Border>
 
         <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="NewClientBorder" Visibility="Collapsed" >
@@ -174,10 +187,10 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="1">
                     <TextBlock Text="Поиск:" Margin="40 35 0 0" FontSize="12" Foreground="#432818" Height="25" VerticalAlignment="Top"/>
                     <TextBox Height="25" Width="160" VerticalAlignment="Top" Margin="10 35 0 0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                    
+
                 </StackPanel>
 
-                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding SelectedService}">
+                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding AddServiceList}" SelectedItem="{Binding SelectedService}" x:Name="MyDataGridService">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="95" Header="Название" Binding="{Binding Title}"/>
                         <DataGridTextColumn Width="95" Header="Всего человек" Binding="{Binding NumberOfPersons}"/>
@@ -211,13 +224,13 @@
 
                 </StackPanel>
 
-                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding WorkerList}" SelectedItem="{Binding SelectedWorker}">
+                <DataGrid Grid.Row="2" Height="355" Width="385" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding AddWorkerList }" SelectedItem="{Binding SelectedWorker}" x:Name="MyDataGridWorker">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="95" Header="Фамилия" Binding="{Binding Surname}"/>
                         <DataGridTextColumn Width="95" Header="Имя" Binding="{Binding Name}"/>
                         <DataGridTextColumn Width="97" Header="Отчество"  Binding="{Binding Patronymic}"/>
                         <DataGridTextColumn Width="97" Header="Дата рождения"  Binding="{Binding Birthday}"/>
-                    </DataGrid.Columns> 
+                    </DataGrid.Columns>
                 </DataGrid>
 
                 <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddWorkerName"/>
@@ -227,6 +240,36 @@
 
         </Border>
 
+        <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorderGraph" Visibility="Collapsed">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Выбрать график" VerticalAlignment="Top" Height="50" Width="455"  Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="0 0 0 2" BorderBrush="#8E5701" Grid.Row="0"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+
+                </StackPanel>
+
+                <DataGrid Grid.Row="2" Height="355" Width="345" Margin="0,40,0,0" AutoGenerateColumns="False" IsReadOnly="True" FontSize="12" ItemsSource="{Binding GraphList}" SelectedItem="{Binding SelectedGraph}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="115" Header="День недели" Binding="{Binding IdGraphNavigation.DayOfWeek}"/>
+                        <DataGridTextColumn Width="115" Header="Время начала" Binding="{Binding IdGraphNavigation.StartTime}" />
+                        <DataGridTextColumn Width="115" Header="Время конца"  Binding="{Binding IdGraphNavigation.EndTime}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddGraph"/>
+
+            </Grid>
+
+
+        </Border>
 
 
     </Grid>

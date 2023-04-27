@@ -21,8 +21,6 @@ public partial class Worker
 
     public string? PassportDetails { get; set; }
 
-    public string? PlaceOfRegistration { get; set; }
-
     public string? PhoneNumber { get; set; }
 
     public string? Email { get; set; }
@@ -30,6 +28,12 @@ public partial class Worker
     public string? Login { get; set; }
 
     public string? Password { get; set; }
+
+    public string? Street { get; set; }
+
+    public string? HomeNumber { get; set; }
+
+    public int? FlatNumber { get; set; }
 
     public virtual Post IdPostNavigation { get; set; } = null!;
 

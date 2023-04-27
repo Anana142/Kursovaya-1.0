@@ -19,13 +19,18 @@ namespace Kursovaya_1._0
     /// </summary>
     public partial class Main : Window
     {
-        public Main()
+        public Worker Worker { get; }
+        public Main(Worker worker)
         {
             InitializeComponent();
 
-            Navigation.GetInstance().CurrentPage = new MainPage();
+            Navigation.GetInstance().CurrentPage = new MainPage(worker);
 
             DataContext = Navigation.GetInstance();
         }
+
+        
+
+        
     }
 }

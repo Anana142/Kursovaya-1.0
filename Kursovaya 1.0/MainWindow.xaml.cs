@@ -68,7 +68,7 @@ namespace Kursovaya_1._0
 
             if (worcer != null)
             {
-                Main main = new Main();
+                Main main = new Main(worcer);
                 main.Show();
                 this.Close();
             }

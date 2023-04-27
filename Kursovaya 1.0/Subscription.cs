@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,14 +9,12 @@ namespace Kursovaya_1._0;
 public partial class Subscription
 {
     public int Id { get; set; }
-    
+
     public string? Status { get; set; }
 
     public DateOnly? StartDate { get; set; }
 
     public int? IdPeriod { get; set; }
-
-    public int? IdDiscount { get; set; }
 
     public int? IdClient { get; set; }
 
@@ -27,44 +24,38 @@ public partial class Subscription
 
     public virtual Client? IdClientNavigation { get; set; }
 
-    public virtual Discount? IdDiscountNavigation { get; set; }
-
     public virtual Period? IdPeriodNavigation { get; set; }
 
     public virtual ICollection<Sale> Sales { get; } = new List<Sale>();
 
-    public virtual ICollection<Serviceworkersgraph> IdServices { get; } = new List<Serviceworkersgraph>();
+    public virtual ICollection<Subscriptionservice> Subscriptionservices { get; } = new List<Subscriptionservice>();
 
     [NotMapped]
-    
+
     public List<Graph> GraphicsView
     {
         get
         {
             List<Graph> graphs = new List<Graph>();
 
-            foreach (Serviceworkersgraph swg in this.IdServices)
+            foreach (var SS in Subscriptionservices)
             {
-                if (DataBase.GetInstance().Graphs.FirstOrDefault(s => s.Id == swg.IdGraph) != null)
-                    graphs.Add(DataBase.GetInstance().Graphs.FirstOrDefault(s => s.Id == swg.IdGraph));
+                graphs.Add(DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).FirstOrDefault(s => s.Id == SS.IdService).IdGraphNavigation);
             }
 
             return graphs;
         }
     }
-    
+
     public string ServiceTitle
     {
         get
         {
-            int IdSWG = this.IdServices.First().Id;
-
-            Serviceworkersgraph sqg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).FirstOrDefault(s => s.Id == IdSWG);
+            Serviceworkersgraph sqg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).FirstOrDefault(s => s.Id == Subscriptionservices.First().IdService);
 
             string title = sqg.IdServiceNavigation.Title;
 
-            return title; 
-            //return DataBase.GetInstance().Services.FirstOrDefault(s => s.Id == this.IdServices.First().IdService).Title;
+            return title;
         }
     }
 
@@ -80,14 +71,14 @@ public partial class Subscription
     {
         get
         {
-
-            decimal? price = (decimal)DataBase.GetInstance().Services.FirstOrDefault(s => s.Id == this.IdServices.First().IdService).PricePerHour;
-
-            decimal? discount = (decimal)this.IdDiscountNavigation.Size / 100;
-
-            price = price - (price * discount);
-
-            return price.ToString() + " руб.";
+            decimal? price = 0;
+            if (DataBase.GetInstance().Sales.FirstOrDefault(s => s.IdSubscription == this.Id) != null)
+                 price= DataBase.GetInstance().Sales.FirstOrDefault(s => s.IdSubscription == this.Id).Sum;
+           return price.ToString() + " руб.";
         }
     }
+    public string DataStartView { get
+        {
+            return this.StartDate.ToString();
+        } }
 }

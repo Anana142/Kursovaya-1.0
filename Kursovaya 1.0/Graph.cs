@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Net.Http.Headers;
 
 namespace Kursovaya_1._0;
 
@@ -19,8 +17,6 @@ public partial class Graph
 
     public override string ToString()
     {
-        return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();   
+        return DayOfWeek + " " + StartTime.ToString() + "-" + EndTime.ToString();
     }
-
-   
 }

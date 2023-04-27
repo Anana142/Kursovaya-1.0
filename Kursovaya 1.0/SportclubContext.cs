@@ -17,11 +17,7 @@ public partial class SportclubContext : DbContext
 
     public virtual DbSet<Attendance> Attendances { get; set; }
 
-    public virtual DbSet<Branch> Branches { get; set; }
-
     public virtual DbSet<Client> Clients { get; set; }
-
-    public virtual DbSet<Discount> Discounts { get; set; }
 
     public virtual DbSet<Graph> Graphs { get; set; }
 
@@ -36,6 +32,8 @@ public partial class SportclubContext : DbContext
     public virtual DbSet<Serviceworkersgraph> Serviceworkersgraphs { get; set; }
 
     public virtual DbSet<Subscription> Subscriptions { get; set; }
+
+    public virtual DbSet<Subscriptionservice> Subscriptionservices { get; set; }
 
     public virtual DbSet<Worker> Workers { get; set; }
 
@@ -66,18 +64,6 @@ public partial class SportclubContext : DbContext
                 .HasConstraintName("FK_attendance_IdSubscription");
         });
 
-        modelBuilder.Entity<Branch>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity
-                .ToTable("branch")
-                .UseCollation("utf8mb4_unicode_ci");
-
-            entity.Property(e => e.Adress).HasMaxLength(255);
-            entity.Property(e => e.Title).HasMaxLength(255);
-        });
-
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -91,17 +77,6 @@ public partial class SportclubContext : DbContext
             entity.Property(e => e.Patronymic).HasMaxLength(255);
             entity.Property(e => e.PhoneNumber).HasMaxLength(255);
             entity.Property(e => e.SurName).HasMaxLength(255);
-        });
-
-        modelBuilder.Entity<Discount>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity
-                .ToTable("discount")
-                .UseCollation("utf8mb4_unicode_ci");
-
-            entity.Property(e => e.Title).HasMaxLength(255);
         });
 
         modelBuilder.Entity<Graph>(entity =>
@@ -171,15 +146,9 @@ public partial class SportclubContext : DbContext
                 .ToTable("service")
                 .UseCollation("utf8mb4_unicode_ci");
 
-            entity.HasIndex(e => e.IdBranch, "FK_service_IdBranch");
-
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.PricePerHour).HasPrecision(10, 2);
             entity.Property(e => e.Title).HasMaxLength(255);
-
-            entity.HasOne(d => d.IdBranchNavigation).WithMany(p => p.Services)
-                .HasForeignKey(d => d.IdBranch)
-                .HasConstraintName("FK_service_IdBranch");
         });
 
         modelBuilder.Entity<Serviceworkersgraph>(entity =>
@@ -221,41 +190,36 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdClient, "FK_subscription_IdClient");
 
-            entity.HasIndex(e => e.IdDiscount, "FK_subscription_IdDiscount");
-
             entity.Property(e => e.Status).HasMaxLength(255);
 
             entity.HasOne(d => d.IdClientNavigation).WithMany(p => p.Subscriptions)
                 .HasForeignKey(d => d.IdClient)
                 .HasConstraintName("FK_subscription_IdClient");
 
-            entity.HasOne(d => d.IdDiscountNavigation).WithMany(p => p.Subscriptions)
-                .HasForeignKey(d => d.IdDiscount)
-                .HasConstraintName("FK_subscription_IdDiscount");
-
             entity.HasOne(d => d.IdPeriodNavigation).WithMany(p => p.Subscriptions)
                 .HasForeignKey(d => d.IdPeriod)
                 .HasConstraintName("FK_Subscription_IdPeriod");
+        });
 
-            entity.HasMany(d => d.IdServices).WithMany(p => p.IdSubscrirtions)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Subscriptionservice",
-                    r => r.HasOne<Serviceworkersgraph>().WithMany()
-                        .HasForeignKey("IdService")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_subscriptionservice_IdService2"),
-                    l => l.HasOne<Subscription>().WithMany()
-                        .HasForeignKey("IdSubscrirtion")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_subscriptionservice_IdSubscrirtion"),
-                    j =>
-                    {
-                        j.HasKey("IdSubscrirtion", "IdService")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("subscriptionservice");
-                        j.HasIndex(new[] { "IdService" }, "FK_subscriptionservice_IdService2");
-                    });
+        modelBuilder.Entity<Subscriptionservice>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("subscriptionservice");
+
+            entity.HasIndex(e => e.IdService, "IX_Subscriptionservices_IdService");
+
+            entity.HasIndex(e => e.IdSubscrirtion, "IX_Subscriptionservices_IdSubscrirtion");
+
+            entity.HasOne(d => d.IdServiceNavigation).WithMany(p => p.Subscriptionservices)
+                .HasForeignKey(d => d.IdService)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_subscriptionservice_IdService2");
+
+            entity.HasOne(d => d.IdSubscrirtionNavigation).WithMany(p => p.Subscriptionservices)
+                .HasForeignKey(d => d.IdSubscrirtion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_subscriptionservice_IdSubscrirtion");
         });
 
         modelBuilder.Entity<Worker>(entity =>
@@ -270,13 +234,14 @@ public partial class SportclubContext : DbContext
 
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.Gender).HasMaxLength(255);
+            entity.Property(e => e.HomeNumber).HasMaxLength(255);
             entity.Property(e => e.Login).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.PassportDetails).HasMaxLength(255);
             entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.Patronymic).HasMaxLength(255);
             entity.Property(e => e.PhoneNumber).HasMaxLength(255);
-            entity.Property(e => e.PlaceOfRegistration).HasMaxLength(255);
+            entity.Property(e => e.Street).HasMaxLength(255);
             entity.Property(e => e.Surname).HasMaxLength(255);
 
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Workers)

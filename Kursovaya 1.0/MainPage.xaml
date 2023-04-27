@@ -306,7 +306,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
 
         </Grid.ColumnDefinitions>
         
@@ -315,7 +315,7 @@
 
 
                         <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#432818"/>
-                <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="100" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
+                <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="230" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
                         <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver" />
 
             </StackPanel>
@@ -340,28 +340,31 @@
 
 
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Margin="0 50 0 0" SelectedItem="{Binding Selected}"  HorizontalAlignment="Left" Grid.Column="0" ItemsSource="{Binding ListSubscriptions}" Width="635" Height="420" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}" x:Name="MyDataGrid">
-                        <DataGrid.Columns>
-                           
-                         <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*"/>
-                        <DataGridTextColumn Binding="{Binding IdClientNavigation.SurName}" Header="Фамилия Клиента"  Width="110*"/>
+        
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True"  Margin="0 50 0 0" Width="820" SelectedItem="{Binding Selected}" Grid.Row="1"  HorizontalAlignment="Left"  ItemsSource="{Binding ListSubscriptions}" Height="420" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}" x:Name="MyDataGrid">
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*"/>
+                        <DataGridTextColumn Binding="{Binding IdClientNavigation.SurName}" Header="Фамилия Клиента"  Width="60*"/>
                         <DataGridTextColumn Binding="{Binding ServiceTitle}" Header="Услуга"  Width="60*"/>
-                        
 
 
-                        <DataGridTemplateColumn Header="График"  Width="60*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ListBox ItemsSource="{Binding GraphicsView}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
 
-                <DataGridTextColumn Binding="{Binding Status}" Header="Статус"  Width="60*"/>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="Осталось посещений"   Width="60*"/>
-                            
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <DataGridTemplateColumn Header="График"  Width="110*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding GraphicsView}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Binding="{Binding Status}" Header="Статус"  Width="60*"/>
+                        <DataGridTextColumn Binding="{Binding UsedVisits }" Header="Осталось посещений"   Width="60*"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+           
+        
 
                     <Button Height="35" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Margin="0 45 0 0" Grid.Row="2" VerticalAlignment="Top" Click="AddSub" />
 
@@ -405,7 +408,7 @@
                         <TextBlock Height="20" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" Text="{Binding Selected.ServiceTitle}"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.IdClientNavigation.SurName}" Margin="5 10 0 0" HorizontalAlignment="Left" />
                         <ListBox Height="65" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}"/>
-                        <TextBlock Height="20" Width="170" Text="" Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="20" Width="170" Text="{Binding Selected.DataStartView}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.Status}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.TotalVisits}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.UsedVisits}" Margin="5 10 0 0" HorizontalAlignment="Left"/>

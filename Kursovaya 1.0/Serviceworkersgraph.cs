@@ -20,12 +20,15 @@ public partial class Serviceworkersgraph
 
     public virtual Worker? IdWorkerNavigation { get; set; }
 
-    public virtual ICollection<Subscription> IdSubscrirtions { get; } = new List<Subscription>();
+    public virtual ICollection<Subscriptionservice> Subscriptionservices { get; } = new List<Subscriptionservice>();
 
     [NotMapped]
-    public int Busy { get
+    public int Busy
+    {
+        get
         {
-            return IdSubscrirtions.Count;
+            return Subscriptionservices.Count;
 
-        } }
+        }
+    }
 }

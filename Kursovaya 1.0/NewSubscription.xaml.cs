@@ -66,10 +66,12 @@ namespace Kursovaya_1._0
         public int SelectedIndexCombobox { get; set; } 
         public Serviceworkersgraph RemoveFromListBox { get; set; }
         public decimal Price { get; set; } 
+        public Worker Worker { get; set; }
        
-        public NewSubscription()
+        public NewSubscription(Worker worker)
         {
             InitializeComponent();
+            Worker = worker;    
             PeriodList = DataBase.GetInstance().Periods.ToList();
             DataContext = this;
         }
@@ -436,9 +438,21 @@ namespace Kursovaya_1._0
                 DataBase.GetInstance().Subscriptions.Add(sub);
                 DataBase.GetInstance().SaveChanges();
                 
-                Subscription last =  DataBase.GetInstance().Subscriptions.Include(s => s.IdServices).OrderBy(s => s.Id).Last();
+                Subscription last =  DataBase.GetInstance().Subscriptions.OrderBy(s => s.Id).Last();
+               
+                foreach(Serviceworkersgraph swg in AddGraphList)
+                {
+                    DataBase.GetInstance().Subscriptionservices.Add(new Subscriptionservice() { IdSubscrirtion = last.Id, IdService = swg.Id });
+                }
+
                
 
+                DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateTime.Now, Sum = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek });
+                DataBase.GetInstance().SaveChanges();
+                MessageBox.Show("Все ок!");
+
+
+                
             }
 
         }

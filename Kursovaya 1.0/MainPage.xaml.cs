@@ -40,11 +40,15 @@ namespace Kursovaya_1._0
 
         public string SearchText { get => searchText; set { searchText = value; Search(); } }
         public int SelectedSortNumber { get => selectedSortNumber; set { selectedSortNumber = value; Search(); } }
-        public MainPage()
+
+        public Worker Worker { get; set; }
+        public MainPage(Worker worker)
         {
             InitializeComponent();
 
-            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.IdServices).Include(s => s.Attendances).Include(s => s.IdDiscountNavigation).ToList();
+            Worker = worker;
+
+            this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.Subscriptionservices).Include(s => s.Attendances).ToList();
 
 
             DataContext = this;
@@ -94,6 +98,7 @@ namespace Kursovaya_1._0
                 DataBase.GetInstance().Attendances.Add(attendance);
                 DataBase.GetInstance().SaveChanges();
                 Signal(nameof(Selected));
+                Search();
             }
         }
         private void Search()
@@ -128,7 +133,7 @@ namespace Kursovaya_1._0
 
         private void AddSub(object sender, RoutedEventArgs e)
         {
-            Navigation.GetInstance().CurrentPage = new NewSubscription();
+            Navigation.GetInstance().CurrentPage = new NewSubscription(Worker);
         }
     }
 }

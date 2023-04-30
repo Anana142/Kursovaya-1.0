@@ -22,7 +22,8 @@
         </Grid.RowDefinitions>
 
         <Label Content="Новый абонемент" FontSize="24" FontWeight="Medium" Foreground="#432818" Margin="0 45 0 0"/>
-        <Button Grid.Column="1" Height="25" Width="25" HorizontalAlignment="Right" Margin="0 25 40 0"/>
+        <Button Grid.Column="1" Height="25" Width="25" HorizontalAlignment="Right" Margin="0 25 40 0" Click="Exid" x:Name="ButtonExitInMain" Visibility="Visible"/>
+        <Button Grid.Column="1" Height="25" Width="25" HorizontalAlignment="Right" Margin="0 25 40 0" Click="ExidInSubsc" x:Name="ButtonExitInSub" Visibility="Collapsed"/>
 
         <Grid Grid.Column="0" Grid.Row="1">
 
@@ -99,6 +100,7 @@
         </Grid>
 
         <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddSubscription"/>
+      
 
 
         <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" BorderBrush="#8E5701" BorderThickness="2" x:Name="MyBorder" Visibility="Collapsed">

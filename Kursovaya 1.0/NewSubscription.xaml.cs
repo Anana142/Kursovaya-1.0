@@ -39,6 +39,7 @@ namespace Kursovaya_1._0
         private Client addClientName;
         private Serviceworkersgraph selectedGraph;
         private List<Serviceworkersgraph> addGraphList = new List<Serviceworkersgraph>();
+        private decimal price;
 
         public List<Client> ClientList { get => clientList; set { clientList = value; Signal(); } }
         public List<Service> ServiceList { get => serviceList; set { serviceList = value; Signal(); } }
@@ -63,16 +64,19 @@ namespace Kursovaya_1._0
         public string SearchText { get => searchText; set { searchText = value; Search(); } }
         public Client NewClient { get => newClient; set { newClient = value; Signal(); } }
         public string BirthdayNewClient { get => birthdayNewClient; set { birthdayNewClient = value; SpelledCorrectly(); Signal(); } }
-        public int SelectedIndexCombobox { get; set; } 
+        public int SelectedIndexCombobox { get; set; }
         public Serviceworkersgraph RemoveFromListBox { get; set; }
-        public decimal Price { get; set; } 
+        public decimal Price { get => price; set { price = value; Signal(); } }
         public Worker Worker { get; set; }
-       
-        public NewSubscription(Worker worker)
+        public bool IsTrue { get; set; }
+
+        public NewSubscription(Worker worker, bool istrue)
         {
             InitializeComponent();
-            Worker = worker;    
+            Worker = worker;
             PeriodList = DataBase.GetInstance().Periods.ToList();
+            IsTrue = istrue;
+            ShowButton(IsTrue);
             DataContext = this;
         }
 
@@ -358,13 +362,13 @@ namespace Kursovaya_1._0
                         Signal(nameof(AddGraphList));
                         ListBoxGraph.Items.Refresh();
                         RemoveGraphButton.Visibility = Visibility.Visible;
-                        
+
                     }
                 }
             }
-            else 
+            else
             {
-                if(AddGraphList.Count < 1)
+                if (AddGraphList.Count < 1)
                 {
                     AddGraphList.Add(SelectedGraph);
                     Signal(nameof(AddGraphList));
@@ -373,7 +377,7 @@ namespace Kursovaya_1._0
                 }
             }
             PriceMaker();
-}
+        }
 
         private void RemoveGraph(object sender, RoutedEventArgs e)
         {
@@ -389,7 +393,8 @@ namespace Kursovaya_1._0
 
         public void PriceMaker()
         {
-            if(SelectedWorker != null && SelectedService != null) {
+            if (SelectedWorker != null && SelectedService != null)
+            {
 
                 int CountWeek = 0;
 
@@ -400,7 +405,7 @@ namespace Kursovaya_1._0
                     CountWeek = PeriodList[SelectedIndexCombobox].Duration / 7;
                 }
 
-                Price = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek ;
+                Price = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek;
                 Signal(nameof(Price));
 
             }
@@ -413,10 +418,12 @@ namespace Kursovaya_1._0
 
             DateOnly data = DateOnly.Parse(dataAndTime[0]);
 
-            return data; }
-            private void AddSubscription(object sender, RoutedEventArgs e)
+            return data;
+        }
+
+        private void AddSubscription(object sender, RoutedEventArgs e)
         {
-            if(AddSelectedService != null && AddSelectedWorker != null && AddClient != null && AddGraphList.Count() != 0)
+            if (AddSelectedService != null && AddSelectedWorker != null && AddClient != null && AddGraphList.Count() != 0 && Worker != null)
             {
                 int CountWeek = 0;
 
@@ -437,24 +444,52 @@ namespace Kursovaya_1._0
                 };
                 DataBase.GetInstance().Subscriptions.Add(sub);
                 DataBase.GetInstance().SaveChanges();
-                
-                Subscription last =  DataBase.GetInstance().Subscriptions.OrderBy(s => s.Id).Last();
-               
-                foreach(Serviceworkersgraph swg in AddGraphList)
+
+                Subscription last = DataBase.GetInstance().Subscriptions.OrderBy(s => s.Id).Last();
+
+                foreach (Serviceworkersgraph swg in AddGraphList)
                 {
                     DataBase.GetInstance().Subscriptionservices.Add(new Subscriptionservice() { IdSubscrirtion = last.Id, IdService = swg.Id });
                 }
 
-               
+
 
                 DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateTime.Now, Sum = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek });
                 DataBase.GetInstance().SaveChanges();
                 MessageBox.Show("Все ок!");
 
-
-                
+                AddClient = null;
+                AddGraphList = new List<Serviceworkersgraph>();
+                AddSelectedService = null;
+                AddSelectedWorker = null;
+                Price = 0;
+                SelectedIndexCombobox = 0;
             }
 
         }
+
+        private void Exid(object sender, RoutedEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new MainPage(Worker);
+        }
+        private void ExidInSubsc(object sender, RoutedEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new SubscriptionPage(Worker);
+        }
+        public void ShowButton(bool istrue)
+        {
+            if (istrue)
+            {
+                ButtonExitInMain.Visibility = Visibility.Visible;
+                ButtonExitInSub.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ButtonExitInMain.Visibility = Visibility.Collapsed;
+                ButtonExitInSub.Visibility = Visibility.Visible;
+            }
+        }
+
+
     }
 }

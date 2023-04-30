@@ -1,0 +1,53 @@
+﻿<Page x:Class="Kursovaya_1._0.GraphPage" Background="#FFFBF5"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kursovaya_1._0"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1170"
+      Title="GraphPage">
+
+    
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="График" FontSize="19" FontWeight="Bold" Foreground="#432818" Margin="10 25 0 0"/>
+
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480" Margin="10 25 30 0"  SelectedItem="{Binding SelectedSubscription}" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  ItemsSource="{Binding ListSubscriptions}" Height="420" BorderBrush="#FF8E5701" >
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="5*" />
+                    <DataGridTextColumn Binding="{Binding IdClientNavigation.SurName}" Header="Фамилия Клиента" Width="60*" />
+                    <DataGridTextColumn Binding="{Binding ServiceTitle}" Header="Услуга" Width="60*" />
+
+
+
+                    <DataGridTemplateColumn Header="График" Width="80*" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding GraphicsView}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Binding="{Binding Status}" Header="Статус" Width="60*" />
+                    <DataGridTextColumn Binding="{Binding TotalVisits}" Header="Всего посещений" Width="60*"/>
+                    <DataGridTextColumn Binding="{Binding UsedVisits }" Header="Осталось посещений" Width="60*"  />
+                    <DataGridTextColumn Binding="{Binding DataStartView }" Header="Дата начала" Width="60*"/>
+                    <DataGridTextColumn Binding="{Binding IdPeriodNavigation.Duration }" Header="Период" Width="50*"/>
+
+
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Добавить" />
+                        <MenuItem Header="удалить" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </Grid>
+</Page>

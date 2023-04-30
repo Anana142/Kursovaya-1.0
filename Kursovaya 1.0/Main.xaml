@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kursovaya_1._0.Main" Background="#FFFBF5"
+﻿<Window x:Class="Kursovaya_1._0.Main"  Background="#FFFBF5"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,15 +8,107 @@
         WindowStartupLocation="CenterScreen"
         Title="Main" Height="720" Width="1280">
     <Grid>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="110" MaxWidth="125"/>
                 <ColumnDefinition MinWidth="1170"/>
             </Grid.ColumnDefinitions>
-            <Button Height="15" Width="30" Margin="57 50 0 0" Style="{DynamicResource ButtonMenu}" VerticalAlignment="Top" />
+
+            
             <Frame Grid.Column="1" NavigationUIVisibility="Hidden" 
                Content="{Binding CurrentPage}"/>
+
+            <Button Height="15" Width="30" Margin="57 50 0 0" Style="{DynamicResource ButtonMenu}" VerticalAlignment="Top" Click="OpenMenuPanel"  HorizontalAlignment="Left" x:Name="ButtonMenuOpen"  Visibility="Visible">
+                <Grid>
+                    <StackPanel>
+                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 0 0 0"/>
+                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Button>
+
         </Grid>
+        <DockPanel MaxWidth="250" HorizontalAlignment="Left" Panel.ZIndex="1" Background="White" x:Name="MenuPanel" Visibility="Collapsed" >
+            <Border BorderThickness="0 0 1 0" BorderBrush="#8E5701" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+
+                        </StackPanel>
+
+                    <Button Height="25" Width="30" Margin="0 25 25 50" Style="{DynamicResource ButtonMenu}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="CloseMenu"/>
+
+                    <StackPanel Grid.Row="1">
+                            <Border Style="{DynamicResource RightMenuElement}">
+                            <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="SubscriptionPageOpen">
+                                    <Label Content="Абонементы" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="GraphPageOpen">
+                                    <Label Content="График" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="ClientPageOpen">
+                                    <Label Content="Клиенты" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenworkerPage">
+                                    <Label Content="Менеджеры" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                            <StackPanel Height="45" VerticalAlignment="Top" Width="250"  MouseLeftButtonDown="OpenSalePage" >
+                                    <Label Content="Продажи" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="40" VerticalAlignment="Top" Width="250">
+                                    <Label Content="Периоды" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250">
+                                    <Label Content="Тренера" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250">
+                                    <Label Content="Услуги" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+
+                            <Rectangle Height="1" Width="250" Fill="#8E5701" Margin="0 10 0 0"/>
+
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" Margin="0 15 0 0">
+                                    <Label Content="Выйти" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                   
+                </Grid>
+                
+            </Border>
+        </DockPanel>
+
         
+
+
+
+
+
+
+
     </Grid>
 </Window>

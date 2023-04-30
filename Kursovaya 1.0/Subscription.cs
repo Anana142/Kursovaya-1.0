@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,7 +47,7 @@ public partial class Subscription
             return graphs;
         }
     }
-
+    [NotMapped]
     public string ServiceTitle
     {
         get
@@ -58,7 +59,7 @@ public partial class Subscription
             return title;
         }
     }
-
+    [NotMapped]
     public int UsedVisits
     {
         get
@@ -66,7 +67,7 @@ public partial class Subscription
             return TotalVisits - Attendances.Count;
         }
     }
-
+    [NotMapped]
     public string Price
     {
         get
@@ -77,8 +78,12 @@ public partial class Subscription
            return price.ToString() + " руб.";
         }
     }
+    [NotMapped]
     public string DataStartView { get
         {
             return this.StartDate.ToString();
-        } }
+        }
+    }
+
+   
 }

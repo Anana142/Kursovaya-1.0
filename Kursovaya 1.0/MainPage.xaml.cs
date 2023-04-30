@@ -133,7 +133,7 @@ namespace Kursovaya_1._0
 
         private void AddSub(object sender, RoutedEventArgs e)
         {
-            Navigation.GetInstance().CurrentPage = new NewSubscription(Worker);
+            Navigation.GetInstance().CurrentPage = new NewSubscription(Worker, true);
         }
     }
 }

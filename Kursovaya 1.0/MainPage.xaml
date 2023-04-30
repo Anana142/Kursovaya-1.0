@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Kursovaya_1._0"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1170"
+    
       Title="Main"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Page.Resources>
@@ -305,8 +306,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition />
 
         </Grid.ColumnDefinitions>
         
@@ -315,7 +316,7 @@
 
 
                         <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#432818"/>
-                <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="230" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
+                        <ComboBox Style="{DynamicResource ComboBox}" Height="25" Width="230" Margin="30 60 0 0" BorderBrush="#FF8E5701" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
                         <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver" />
 
             </StackPanel>
@@ -336,12 +337,7 @@
 
                 </StackPanel>
 
-
-
-
-
-        
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="True"  Margin="0 50 0 0" Width="820" SelectedItem="{Binding Selected}" Grid.Row="1"  HorizontalAlignment="Left"  ItemsSource="{Binding ListSubscriptions}" Height="420" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}" x:Name="MyDataGrid">
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True"  Margin="0 50 30 0" MinWidth="820" SelectedItem="{Binding Selected}" Grid.Row="1"  HorizontalAlignment="Left"  ItemsSource="{Binding ListSubscriptions}" Height="430" BorderBrush="#FF8E5701" Style="{DynamicResource DataGridStyle}" x:Name="MyDataGrid">
                     <DataGrid.Columns>
 
                         <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*"/>
@@ -366,7 +362,7 @@
            
         
 
-                    <Button Height="35" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Margin="0 45 0 0" Grid.Row="2" VerticalAlignment="Top" Click="AddSub" />
+        <Button Height="35" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Margin="0 30 0 0" Grid.Row="2" VerticalAlignment="Center" Click="AddSub" />
 
         <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Margin="0 50 0 0" Width="325" HorizontalAlignment="Right" >
             <Grid.ColumnDefinitions>
@@ -382,10 +378,10 @@
 
             <Label Grid.Row="0" Grid.ColumnSpan="2" Height="50" Width="325" Content="Абонемент" Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="2" BorderBrush="#8E5701"/>
 
-            <Border  Grid.Row="1" Grid.Column="0"  Width="325" BorderThickness="2 0 0 2" BorderBrush="#8E5701" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+            <Border  Grid.Row="1" Grid.Column="0"  Width="325" BorderThickness="2 0 0 2" BorderBrush="#8E5701" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="2">
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -407,7 +403,7 @@
                     <StackPanel  Grid.Column="1" Height="auto" Width="auto">
                         <TextBlock Height="20" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" Text="{Binding Selected.ServiceTitle}"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.IdClientNavigation.SurName}" Margin="5 10 0 0" HorizontalAlignment="Left" />
-                        <ListBox Height="65" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}"/>
+                        <ListBox Height="65" Width="160"  Margin="5 10 10  0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.DataStartView}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.Status}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
                         <TextBlock Height="20" Width="170" Text="{Binding Selected.TotalVisits}" Margin="5 10 0 0" HorizontalAlignment="Left"/>

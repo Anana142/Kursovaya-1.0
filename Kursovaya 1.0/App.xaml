@@ -138,7 +138,25 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Background" Value="#826AED"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Padding" Value="10 0 10 0"/>
+           
+           
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="ToolTip" Value="Click to sort."/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        
 
 
-    </Application.Resources>
+     
+        </Application.Resources>
 </Application>

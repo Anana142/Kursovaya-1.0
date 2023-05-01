@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -63,7 +62,7 @@ public partial class Subscription
     public int UsedVisits
     {
         get
-        {
+        {   
             return TotalVisits - Attendances.Count;
         }
     }
@@ -74,16 +73,16 @@ public partial class Subscription
         {
             decimal? price = 0;
             if (DataBase.GetInstance().Sales.FirstOrDefault(s => s.IdSubscription == this.Id) != null)
-                 price= DataBase.GetInstance().Sales.FirstOrDefault(s => s.IdSubscription == this.Id).Sum;
-           return price.ToString() + " руб.";
+                price = DataBase.GetInstance().Sales.FirstOrDefault(s => s.IdSubscription == this.Id).Sum;
+            return price.ToString() + " руб.";
         }
     }
     [NotMapped]
-    public string DataStartView { get
+    public string DataStartView
+    {
+        get
         {
             return this.StartDate.ToString();
         }
     }
-
-   
 }

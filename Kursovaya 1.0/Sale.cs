@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -28,7 +27,7 @@ public partial class Sale
         get
         {
             Subscription subscription = DataBase.GetInstance().Subscriptions.FirstOrDefault(s => s.Id == this.IdSubscription);
-            if(subscription != null)
+            if (subscription != null)
             {
                 Client client = DataBase.GetInstance().Clients.FirstOrDefault(s => s.Id == subscription.IdClient);
                 if (client != null)

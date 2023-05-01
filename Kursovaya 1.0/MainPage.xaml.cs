@@ -32,7 +32,7 @@ namespace Kursovaya_1._0
         public DataBase DataBase { get; set; } = new DataBase();
         public List<Subscription> ListSubscriptions { get => listSubscriptions; set { listSubscriptions = value; Signal(); } }
 
-        public List<string> SortingList { get; set; } = new List<string>() { "Нет сортировки", "Сортировка по Фамилии клиента", "Сортировка по активности", "Сортировка по Услуге" };
+        public List<string> SortingList { get; set; } = new List<string>() { "Нет сортировки", "Сортировка по фамилии клиента", "Сортировка по активности" };
 
 
 
@@ -47,14 +47,15 @@ namespace Kursovaya_1._0
             InitializeComponent();
 
             Worker = worker;
-
+            MyDataGrid.VerticalGridLinesBrush = new SolidColorBrush(Colors.Transparent);
+            MyDataGrid.HorizontalGridLinesBrush = new SolidColorBrush(Colors.White);
+           
             this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.Subscriptionservices).Include(s => s.Attendances).ToList();
 
 
             DataContext = this;
 
             
-
         }
 
         
@@ -91,15 +92,33 @@ namespace Kursovaya_1._0
         {
             if (Selected != null)
             {
-                Attendance attendance = new Attendance();
-                attendance.IdSubscription = Selected.Id;
-                attendance.Date = DateTime.Now;
+                
+                if (Selected.UsedVisits > 0)
+                {
+                    Attendance attendance = new Attendance();
+                    attendance.IdSubscription = Selected.Id;
+                    attendance.Date = DateTime.Now;
 
-                DataBase.GetInstance().Attendances.Add(attendance);
-                DataBase.GetInstance().SaveChanges();
-                Signal(nameof(Selected));
-                Search();
+                    DataBase.GetInstance().Attendances.Add(attendance);
+                    DataBase.GetInstance().SaveChanges();
+                    Signal(nameof(Selected));
+                    Search();
+                }
+                if(Selected.UsedVisits <= 0)
+                {
+                    Selected.Status = "Неактивен";
+                    DataBase.GetInstance().Subscriptions.Update(Selected);
+                    DataBase.GetInstance().SaveChanges();
+
+                }
+
+                ListSubscriptions = DataBase.GetInstance().Subscriptions.ToList();
+               
             }
+            
+
+
+
         }
         private void Search()
         {
@@ -135,5 +154,7 @@ namespace Kursovaya_1._0
         {
             Navigation.GetInstance().CurrentPage = new NewSubscription(Worker, true);
         }
+
+        
     }
 }

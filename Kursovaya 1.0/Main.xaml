@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kursovaya_1._0.Main"  Background="#FFFBF5"
+﻿<Window x:Class="Kursovaya_1._0.Main"  Background="#FBF5FF"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -72,18 +72,19 @@
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
-                                <StackPanel Height="40" VerticalAlignment="Top" Width="250">
-                                    <Label Content="Периоды" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
-                                </StackPanel>
-                            </Border>
-                            <Border Style="{DynamicResource RightMenuElement}">
-                                <StackPanel Height="45" VerticalAlignment="Top" Width="250">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenTrainerPage">
                                     <Label Content="Тренера" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
-                                <StackPanel Height="45" VerticalAlignment="Top" Width="250">
+                            <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenServicePage">
                                     <Label Content="Услуги" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenTrashPage">
+                                    <Label Content="Корзина" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
 

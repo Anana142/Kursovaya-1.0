@@ -1,4 +1,4 @@
-﻿<Page x:Class="Kursovaya_1._0.WorkerPage" Background="#FFFBF5"
+﻿<Page x:Class="Kursovaya_1._0.TrainerPage"  Background="#FFFBF5"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Kursovaya_1._0"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1170"
-      Title="WorkerPage">
+      Title="TrainerPage">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +24,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Менеджеры" FontSize="19" FontWeight="Bold" Foreground="#432818" Margin="10 45 0 0" HorizontalAlignment="Left"/>
+            <Label Content="Тренера" FontSize="19" FontWeight="Bold" Foreground="#432818" Margin="10 45 0 0" HorizontalAlignment="Left"/>
             <Button Height="25" Width="25" HorizontalAlignment="Right" Grid.Column="1" Margin="0 20 35 0" Click="OpenMainPage"/>
 
         </Grid>
@@ -43,7 +43,7 @@
                 <DataGridTextColumn Binding="{Binding HomeNumber}" Header="Дом" Width="30*"/>
                 <DataGridTextColumn Binding="{Binding FlatNumber }" Header="Квартира" Width="40*"  />
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="60*"/>
-                
+
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -112,8 +112,5 @@
                 </Grid>
             </Border>
         </DockPanel>
-
-
-
     </Grid>
 </Page>

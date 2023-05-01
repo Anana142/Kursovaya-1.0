@@ -14,6 +14,8 @@ public partial class Serviceworkersgraph
 
     public int? IdGraph { get; set; }
 
+    public bool? IsDeleted { get; set; }
+
     public virtual Graph? IdGraphNavigation { get; set; }
 
     public virtual Service? IdServiceNavigation { get; set; }

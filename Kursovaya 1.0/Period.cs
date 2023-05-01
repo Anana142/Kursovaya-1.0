@@ -9,5 +9,7 @@ public partial class Period
 
     public int Duration { get; set; }
 
+    public bool? IsDeleted { get; set; }
+
     public virtual ICollection<Subscription> Subscriptions { get; } = new List<Subscription>();
 }

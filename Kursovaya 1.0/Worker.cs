@@ -35,6 +35,8 @@ public partial class Worker
 
     public int? FlatNumber { get; set; }
 
+    public bool? IsDeleted { get; set; }
+
     public virtual Post IdPostNavigation { get; set; } = null!;
 
     public virtual ICollection<Sale> Sales { get; } = new List<Sale>();

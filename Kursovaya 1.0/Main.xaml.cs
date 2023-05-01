@@ -23,6 +23,7 @@ namespace Kursovaya_1._0
     public partial class Main : Window, INotifyPropertyChanged
     {
         public Worker Worker { get; set; }
+
         public Main(Worker worker)
         {
             InitializeComponent();
@@ -32,11 +33,14 @@ namespace Kursovaya_1._0
 
             DataContext = Navigation.GetInstance();
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void Signal([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
         private void OpenMenuPanel(object sender, RoutedEventArgs e)
         {
             MenuPanel.Visibility = Visibility.Visible;
@@ -96,6 +100,21 @@ namespace Kursovaya_1._0
         private void OpenSalePage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new SalePage(Worker);
+        }
+
+        private void OpenTrainerPage(object sender, MouseButtonEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new TrainerPage(Worker);
+        }
+
+        private void OpenServicePage(object sender, MouseButtonEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new ServicePage(Worker);
+        }
+
+        private void OpenTrashPage(object sender, MouseButtonEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new DeletePage(Worker);
         }
     }
 }

@@ -186,7 +186,7 @@ namespace Kursovaya_1._0
 
             if (AddSelectedWorker == null)
             {
-                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).ToList();
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IsDeleted != true).ToList();
 
 
                 foreach (var serv in swg)
@@ -203,7 +203,7 @@ namespace Kursovaya_1._0
             else if (AddSelectedWorker != null)
             {
 
-                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdWorker == AddSelectedWorker.Id).ToList(); // если щелкать кнопки выбрать тут ошибка
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdWorker == AddSelectedWorker.Id && s.IsDeleted != true).ToList(); 
 
                 foreach (var serv in swg)
                 {
@@ -237,7 +237,7 @@ namespace Kursovaya_1._0
 
             if (AddSelectedService == null)
             {
-                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation).ToList();
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation).Where(s => s.IsDeleted != true).ToList();
 
                 foreach (var serv in swg)
                 {
@@ -250,7 +250,7 @@ namespace Kursovaya_1._0
             }
             else if (AddSelectedService != null)
             {
-                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdService == AddSelectedService.Id).ToList();
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdService == AddSelectedService.Id && s.IsDeleted != true).ToList();
 
                 foreach (var serv in swg)
                 {
@@ -324,7 +324,7 @@ namespace Kursovaya_1._0
                 if (AddSelectedWorker != null && AddSelectedService != null)
                 {
 
-                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id && s.IdWorker == AddSelectedWorker.Id).ToList();
+                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id && s.IdWorker == AddSelectedWorker.Id && s.IsDeleted != true).ToList();
                     foreach (var graph in GraphList)
                     {
                         if (graph.IdServiceNavigation.NumberOfPersons > graph.Busy)
@@ -336,7 +336,7 @@ namespace Kursovaya_1._0
                 }
                 else if (AddSelectedService != null)
                 {
-                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id).ToList();
+                    GraphList = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IdService == AddSelectedService.Id && s.IsDeleted != true).ToList();
                     foreach (var graph in GraphList)
                     {
                         if (graph.IdServiceNavigation.NumberOfPersons > graph.Busy)
@@ -490,6 +490,14 @@ namespace Kursovaya_1._0
             }
         }
 
+        private void DeleteService(object sender, RoutedEventArgs e)
+        {
+            AddSelectedService = null;
+        }
 
+        private void DeleteWorker(object sender, RoutedEventArgs e)
+        {
+            AddSelectedWorker = null;
+        }
     }
 }

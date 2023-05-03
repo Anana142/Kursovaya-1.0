@@ -1,4 +1,4 @@
-﻿<Page x:Class="Kursovaya_1._0.ClientPage" Background="#FFFBF5"
+﻿<Page x:Class="Kursovaya_1._0.ClientPage" Background="#FBF5FF"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -24,12 +24,16 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Клиенты" FontSize="19" FontWeight="Bold" Foreground="#432818" Margin="10 45 0 0" HorizontalAlignment="Left"/>
-            <Button Height="25" Width="25" HorizontalAlignment="Right" Grid.Column="1" Margin="0 20 35 0" Click="OpenMainPage"/>
+            <Label Content="Клиенты" FontSize="19" FontWeight="Bold" Foreground="#292929" Margin="10 45 0 0" HorizontalAlignment="Left"/>
+            <Button Height="35" Width="35" HorizontalAlignment="Right" Grid.Column="1" Margin="0 20 35 0" Click="OpenMainPage" Background="Transparent" BorderThickness="0">
+                <Image Source="Image/exit.png" Height="30" Width="30"/>
+            </Button>
 
         </Grid>
         
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480"  Margin="10 25 30 0"  SelectedItem="{Binding SelectedClient}" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  ItemsSource="{Binding ListClient}" Height="560" BorderBrush="#FF8E5701" x:Name="ClientGrid" >
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480"  Margin="10 25 30 0" 
+                  SelectedItem="{Binding SelectedClient}" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                  ItemsSource="{Binding ListClient}" Height="560" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" x:Name="ClientGrid" Background="#fff" >
             <DataGrid.Columns>
 
                 <DataGridTextColumn Binding="{Binding SurName}" Header="Фамилия" Width="60*" />
@@ -52,20 +56,22 @@
         </DataGrid>
 
         <DockPanel Width="400" Grid.Column="1" Grid.Row="1" x:Name="AddClientPanel" Visibility="Collapsed">
-            <Button Height="25" Width="25" VerticalAlignment="Top" Margin="0 0 20 0" Click="CloseNewClientPanel"/>
-            <Border Width="350" HorizontalAlignment="Right">
-                <Grid>
+            <Button Height="35" Width="35" VerticalAlignment="Top" Margin="0 0 30 0" Click="CloseNewClientPanel" Background="Transparent" BorderThickness="0">
+                <Image Source="image/CloseCircle.png" Height="30" Width="30"/>
+            </Button>
+            
+                <Grid Width="330" HorizontalAlignment="Right" Background="#FFF">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Border BorderBrush="#8E5701" BorderThickness="1 1 1 0">
-                        <Label Content="Добавить клиента" Background="#E1BB80" Height="40" FontSize="16" FontWeight="Bold" Foreground="#432818"/>
-                    </Border>
+                <Border BorderBrush="#826AED" BorderThickness="4" CornerRadius="10 0 0 0">
+                    <Label Content="Клиент" Background="#826AED" Height="40" FontSize="20" FontWeight="SemiBold" Foreground="#fff" Padding="10 5 0 0"/>
+                </Border>
 
-                    <Border BorderBrush="#8E5701" BorderThickness="1 1 0 0" Grid.Row="1">
-                        <Grid Margin="0 25 0 0">
+
+                <Grid Margin="0 25 0 0" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
@@ -85,19 +91,19 @@
                                 <TextBlock Text="Пол: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" >
-                                <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.SurName}"/>
-                                <TextBox  x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Name}"/>
-                                <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Patronymic}"/>
-                                <TextBox  x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.PhoneNumber}"/>
-                                <TextBox  x:Name="Birthday" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient}"/>
-                                <TextBox  x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Gender}"/>
+                        <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.SurName}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
+                        <TextBox  x:Name="Name" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Name}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
+                        <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Patronymic}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
+                        <TextBox  x:Name="PhoneNumber" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.PhoneNumber}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
+                        <TextBox  x:Name="Birthday" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
+                        <TextBox  x:Name="Gender" Margin="10 10 0 10" Width="180" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Gender}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
                             </StackPanel>
 
                             <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="SaveNewClientInClientList" x:Name="SaveNewClient"/>
                         </Grid>
-                    </Border>
+                  
                 </Grid>
-            </Border>
+        
         </DockPanel>
         
 

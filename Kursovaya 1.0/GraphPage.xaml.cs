@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -106,7 +107,7 @@ namespace Kursovaya_1._0
 
         private void AddListGraph(object sender, MouseButtonEventArgs e)
         {
-            FillGraphicsList();
+           FillGraphicsList();
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -128,6 +129,52 @@ namespace Kursovaya_1._0
 
             }
    
+        }
+
+        private void OpenPanel(object sender, RoutedEventArgs e)
+        {
+            GraphPanel.Visibility = Visibility.Visible;
+
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 30;
+            da.To = 430;
+            da.Duration = TimeSpan.FromMilliseconds(300);
+
+            GraphPanel.BeginAnimation(DockPanel.WidthProperty, da);
+        }
+
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            if(SelectedGraph != null)
+            {
+                SelectedGraph.IsDeleted = true;
+                DataBase.GetInstance().Serviceworkersgraphs.Update(SelectedGraph);
+                DataBase.GetInstance().SaveChanges();
+
+                ListGraph = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation)
+                                                                  .Include(s => s.IdServiceNavigation)
+                                                                  .Include(s => s.IdGraphNavigation)
+                                                                  .Where(s => s.IsDeleted != true)
+                                                                  .OrderBy(s => s.IdServiceNavigation.Title)
+                                                                  .ThenBy(s => s.IdGraphNavigation).ToList();
+
+                Signal(nameof (ListGraph)); 
+            }
+        }
+
+        private void ClosePanel(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = GraphPanel.ActualWidth;
+            da.To = 30;
+            da.Duration = TimeSpan.FromMilliseconds(300);
+            da.Completed += CloseEnd;
+            GraphPanel.BeginAnimation(DockPanel.WidthProperty, da);
+
+        }
+        private void CloseEnd(object? sender, EventArgs e)
+        {
+            GraphPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

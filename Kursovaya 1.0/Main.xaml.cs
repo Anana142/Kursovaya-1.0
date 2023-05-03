@@ -61,6 +61,7 @@ namespace Kursovaya_1._0
             da.To = 30;
             da.Duration = TimeSpan.FromMilliseconds(300);
             da.Completed += CloseEnd;
+
             MenuPanel.BeginAnimation(DockPanel.WidthProperty, da);
 
             ButtonMenuOpen.Visibility = Visibility.Visible;
@@ -79,42 +80,59 @@ namespace Kursovaya_1._0
         private void SubscriptionPageOpen(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new SubscriptionPage(Worker);
+
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void GraphPageOpen(object sender, MouseButtonEventArgs e)
         {
-          Navigation.GetInstance().CurrentPage = new GraphPage(Worker);
+            Navigation.GetInstance().CurrentPage = new GraphPage(Worker);
+
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void ClientPageOpen(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new ClientPage(Worker);
-            Signal();
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void OpenworkerPage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new WorkerPage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void OpenSalePage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new SalePage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void OpenTrainerPage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new TrainerPage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void OpenServicePage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new ServicePage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
         }
 
         private void OpenTrashPage(object sender, MouseButtonEventArgs e)
         {
             Navigation.GetInstance().CurrentPage = new DeletePage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
+        }
+
+        private void OpenMainWindow(object sender, MouseButtonEventArgs e)
+        {
+            
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
     }
 }

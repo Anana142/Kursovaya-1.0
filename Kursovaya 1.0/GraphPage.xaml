@@ -291,101 +291,119 @@
         </Style>
     </Page.Resources>
 
-    
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="450"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-            <Label Content="График" FontSize="19" FontWeight="Bold" Foreground="#432818" Margin="10 25 0 0"/>
-        <Button Grid.Column="1" Height="30" Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 0 " Background="Transparent" BorderThickness="0" Click="OpenMainPage">
-            <Image Source="Image/exit.png"/>
-        </Button>
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480" Margin="10 25 30 0"  SelectedItem="{Binding SelectedGraph}" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  
-                      ItemsSource="{Binding ListGraph}" Height="520" BorderThickness="0" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff">
-                
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell" >
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#DED7FF"/>
-                                    <Setter Property="Foreground" Value="#292929"/>
-                                    <Setter Property="BorderBrush" Value="Transparent"/>
+            <Label Content="График" FontSize="19" FontWeight="Bold" Foreground="#292929" Margin="10 45 0 0" HorizontalAlignment="Left"/>
+            <Button Height="30" Width="30" HorizontalAlignment="Right" Grid.Column="1" Margin="0 20 35 0" Click="OpenMainPage" Background="Transparent" BorderThickness="0">
+                <Image Source="Image/exit.png" Height="25" Width="25"/>
+            </Button>
+
+        </Grid>
+
+       
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="10 25 30 0" Height="520" Grid.Row="1"  SelectedItem="{Binding SelectedGraph}"  VerticalAlignment="Top" HorizontalAlignment="Left"  
+                      ItemsSource="{Binding ListGraph}"  BorderThickness="0" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff" Grid.Column="0">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#DED7FF"/>
+                            <Setter Property="Foreground" Value="#292929"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
 
 
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.CellStyle>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
 
-                <DataGrid.Columns>
+            <DataGrid.Columns>
 
                 <DataGridTextColumn Binding="{Binding IdServiceNavigation.Title}" Header="Название Услуги" Width="70*" />
 
                 <DataGridTextColumn Binding="{Binding IdGraphNavigation}" Header="Время" Width="70*" />
 
                 <DataGridTextColumn Binding="{Binding IdWorkerNavigation.FIO}" Header="Тренер" Width="60*" />
-                    
 
 
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Добавить" />
-                        <MenuItem Header="удалить" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
 
-        <DockPanel Width="450" Grid.Column="1" Grid.Row="1" x:Name="GraphPanel" Visibility="Visible" Margin="0 25 0 0">
-            <Button Height="30" Width="30" VerticalAlignment="Top" Margin="0 0 0 0" Click="CloseNewClientPanel" Background="Transparent" BorderThickness="0">
-                <Image Source="Image/CloseCircle.png"/>
-            </Button>
-            <Border Width="400" HorizontalAlignment="Right">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" Click="OpenPanel"/>
+                    <MenuItem Header="Удалить" Click="Delete" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+      
+        <DockPanel Width="470" Grid.Column="1 " Grid.Row="1" x:Name="GraphPanel" Visibility="Collapsed" Margin="20 25 0 0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+                <Button Height="30" Width="30" VerticalAlignment="Top" Margin="20 0 20 0" Click="ClosePanel" Background="Transparent" BorderThickness="0" Grid.Column="0">
+                    <Image Source="Image/CloseCircle.png"/>
+                </Button>
 
-                    <Border BorderBrush="#826AED" BorderThickness="5" CornerRadius="5 0 0 0 " >
-                        <Label Content="Добавить" Background="#826AED" Height="40" FontSize="16" FontWeight="Bold" Foreground="#fff" Padding="10" />
-                    </Border>
+                <Border Width="400" HorizontalAlignment="Right" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <Border  BorderThickness="1 1 0 0" Grid.Row="1">
-                        <Grid Margin="0 0 0 0" Background="#fff">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                              
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                        <Border BorderBrush="#826AED" BorderThickness="5" CornerRadius="5 0 0 0 " >
+                            <Label Content="Добавить" Background="#826AED" Height="40" FontSize="16" FontWeight="Bold" Foreground="#fff" Padding="10" />
+                        </Border>
+
+                        <Border  BorderThickness="1 1 0 0" Grid.Row="1">
+                            <Grid Margin="0 0 0 0" Background="#fff">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
 
-                            <StackPanel Margin="10 20 0 0">
-                                <Label Content="Услуга:"/>
-                                <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="300" ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedService}" DisplayMemberPath="Title"/>
-                                <Label Content="Тренер:"/>
-                                <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListWorker}" SelectedItem="{Binding SelectedWorker}" DisplayMemberPath="FIO" IsReadOnly="True" />
-                                <Label Content="Время:"/>
-                                <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListGrapics}" SelectedItem="{Binding SelectedGraphic}" IsReadOnly="True" MouseDown="AddListGraph"/>
-                            </StackPanel>
-                            
+                                <StackPanel Margin="10 20 0 0">
+                                    <Label Content="Услуга:"/>
+                                    <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="300" ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedService}" DisplayMemberPath="Title"/>
+                                    <Label Content="Тренер:"/>
+                                    <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListWorker}" SelectedItem="{Binding SelectedWorker}" DisplayMemberPath="FIO" IsReadOnly="True" />
+                                    <Label Content="Время:"/>
+                                    <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListGrapics}" SelectedItem="{Binding SelectedGraphic}" IsReadOnly="True" MouseDown="AddListGraph"/>
+                                </StackPanel>
 
-                            <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="Save" x:Name="SaveNewClient"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+
+                                <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="Save" x:Name="SaveNewClient"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+            
+            
         </DockPanel>
-
     </Grid>
 </Page>

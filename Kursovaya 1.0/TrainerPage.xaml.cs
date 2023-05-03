@@ -140,21 +140,30 @@ namespace Kursovaya_1._0
                 }
                 else
                 {
-                    SelectedWorker.Id = EditWorker.Id;
-                    SelectedWorker.Surname = EditWorker.Surname;
-                    SelectedWorker.Name = EditWorker.Name;
-                    SelectedWorker.Patronymic = EditWorker.Patronymic;
-                    SelectedWorker.Birthday = EditWorker.Birthday;
-                    SelectedWorker.PhoneNumber = EditWorker.PhoneNumber;
-                    SelectedWorker.Gender = EditWorker.Gender;
-                    SelectedWorker.PassportDetails = EditWorker.PassportDetails;
-                    SelectedWorker.Street = EditWorker.Street;
-                    SelectedWorker.HomeNumber = EditWorker.HomeNumber;
-                    SelectedWorker.FlatNumber = EditWorker.FlatNumber;
-                    SelectedWorker.Email = EditWorker.Email;
+                    if (EditWorker.Name != null)
+                    {
+                        SelectedWorker.Id = EditWorker.Id;
+                        SelectedWorker.Surname = EditWorker.Surname;
+                        SelectedWorker.Name = EditWorker.Name;
+                        SelectedWorker.Patronymic = EditWorker.Patronymic;
+                        SelectedWorker.Birthday = EditWorker.Birthday;
+                        SelectedWorker.PhoneNumber = EditWorker.PhoneNumber;
+                        SelectedWorker.Gender = EditWorker.Gender;
+                        SelectedWorker.PassportDetails = EditWorker.PassportDetails;
+                        SelectedWorker.Street = EditWorker.Street;
+                        SelectedWorker.HomeNumber = EditWorker.HomeNumber;
+                        SelectedWorker.FlatNumber = EditWorker.FlatNumber;
+                        SelectedWorker.Email = EditWorker.Email;
 
-                    DataBase.GetInstance().Workers.Update(SelectedWorker);
-                    DataBase.GetInstance().SaveChanges();
+                        DataBase.GetInstance().Workers.Update(SelectedWorker);
+                        DataBase.GetInstance().SaveChanges();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка :)");
+                    }
+                    
                 }
                 
                 ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && (s.IsDeleted == null || s.IsDeleted == false)).ToList();

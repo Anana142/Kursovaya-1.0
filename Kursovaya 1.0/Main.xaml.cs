@@ -83,7 +83,7 @@ namespace Kursovaya_1._0
 
         private void GraphPageOpen(object sender, MouseButtonEventArgs e)
         {
-         //  Navigation.GetInstance().CurrentPage = new GraphPage(Worker);
+          Navigation.GetInstance().CurrentPage = new GraphPage(Worker);
         }
 
         private void ClientPageOpen(object sender, MouseButtonEventArgs e)

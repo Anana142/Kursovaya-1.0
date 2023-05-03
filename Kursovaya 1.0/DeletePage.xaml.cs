@@ -29,16 +29,16 @@ namespace Kursovaya_1._0
         private List<Serviceworkersgraph> listGraph;
         private Serviceworkersgraph selectedGraph;
 
-        public Service SelectedService { get => selectedService; set { selectedService = value; Signal(); ButttonVisibility(); } }
+        public Service SelectedService { get => selectedService; set { selectedService = value; Signal();  } }
         public List<Service> ListService { get => listService; set { listService = value; Signal(); } }
 
         public List<Worker> ListWorker { get => listWorker; set { listWorker = value; Signal(); } }
-        public Worker SelectedWorker { get => selectedWorker; set { selectedWorker = value; Signal(); ButttonVisibility(); } }
+        public Worker SelectedWorker { get => selectedWorker; set { selectedWorker = value; Signal();  } }
 
         public List<Serviceworkersgraph> ListGraph { get => listGraph; set { listGraph = value; Signal(); } }
         public Serviceworkersgraph SelectedGraph { get => selectedGraph; set { selectedGraph = value; Signal(); } }
 
-
+        DataBase dataBase { get; set; } = new DataBase();   
         Worker Worker { get; set; }
 
         public DeletePage(Worker worker)
@@ -74,6 +74,8 @@ namespace Kursovaya_1._0
 
             WorkerGrid.Visibility = Visibility.Visible;
             ServiceGrid.Visibility = Visibility.Collapsed;
+            
+            
         }
 
         private void OpenService(object sender, RoutedEventArgs e)
@@ -84,30 +86,11 @@ namespace Kursovaya_1._0
 
             WorkerGrid.Visibility = Visibility.Collapsed;
             ServiceGrid.Visibility = Visibility.Visible;
+            
+           
         }
 
-        private void ButttonVisibility()
-        {
-            if (SelectedService != null )
-            {
-                DeleteOne.Visibility = Visibility.Visible;
-                DeleteAll.Visibility = Visibility.Collapsed;
-
-            }
-
-            if (SelectedWorker != null)
-            {
-                DeleteOne.Visibility = Visibility.Visible;
-                DeleteAll.Visibility = Visibility.Collapsed;
-
-            }
-
-            else
-            {
-                DeleteOne.Visibility = Visibility.Collapsed;
-                DeleteAll.Visibility = Visibility.Visible;
-            }
-        }
+        
 
         private void NotDel(object sender, RoutedEventArgs e)
         {
@@ -138,16 +121,106 @@ namespace Kursovaya_1._0
         {
             if (ServiceGrid.Visibility == Visibility.Visible)
             {
-                if (SelectedService == null && ListService.Count != 0)
+                if(SelectedService!= null)
+                ListService = new List<Service> { SelectedService};
+                             
+                
+                if  (ListService.Count != 0)
                 {
-                    
+
+                   foreach(var service in ListService) { 
+
+                        List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdService == service.Id).ToList();
+
+                        foreach (var item in s)
+                        {
+
+                            List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
+
+                            foreach (var i in ss)
+                            {
+                                List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id == i.IdSubscrirtion).ToList();
+
+                                if (sub.Count > 0)
+                                {
+                                    foreach (var y in sub)
+                                    {
+                                        dataBase.DeleteSubscriotion(y);
+                                        DataBase.GetInstance().SaveChanges();
+
+                                    }
+                                }
+                            }
+                                    
+                            if(item.Id != 0) { 
+                           
+                                    DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
+                                    DataBase.GetInstance().SaveChanges();
+                            }
+
+                        }
+                }
+
+
+                    foreach (var item in ListService)
+                    {
+
+                        DataBase.GetInstance().Services.Remove(item);
+                        DataBase.GetInstance().SaveChanges();
+
+                    }
 
                 }
+
+                ListService = DataBase.GetInstance().Services.Where(s => s.IsDeleted == true).ToList();
             }
+
+
             else if (WorkerGrid.Visibility == Visibility.Visible)
             {
-                if (SelectedWorker == null && ListWorker.Count != 0 )
+
+                if(SelectedWorker !=null)
                 {
+                    ListWorker = new List<Worker> { SelectedWorker };    
+                }
+
+                if ( ListWorker.Count != 0 )
+                {
+                    foreach(var worker in ListWorker) { 
+
+                        List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdWorker == worker.Id).ToList();
+
+                        foreach (var item in s) {
+
+                            List<Subscriptionservice> ss = item.Subscriptionservices.ToList();  
+                            
+                            foreach (var i in ss)
+                            {
+                                List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id ==  i.IdSubscrirtion).ToList();   
+
+                                if(sub.Count > 0)
+                                {
+                                    foreach (var y in sub)
+                                    {
+                                        dataBase.DeleteSubscriotion(y); 
+                                        DataBase.GetInstance().SaveChanges();   
+
+                                    }
+                                }
+
+                            }
+
+                            if (item.Id != 0)
+                            {
+                                DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
+                                DataBase.GetInstance().SaveChanges();
+                            }
+
+
+
+                        }
+
+                    }
                     foreach (var item in ListWorker) 
                     { 
                     
@@ -160,6 +233,11 @@ namespace Kursovaya_1._0
 
                 }
             }
+        }
+
+        private void OpenMainPage(object sender, RoutedEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new MainPage(Worker);
         }
     }
 }

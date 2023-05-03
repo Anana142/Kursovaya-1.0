@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Kursovaya_1._0;
 
@@ -18,4 +22,5 @@ public partial class Service
     public bool? IsDeleted { get; set; }
 
     public virtual ICollection<Serviceworkersgraph> Serviceworkersgraphs { get; } = new List<Serviceworkersgraph>();
+
 }

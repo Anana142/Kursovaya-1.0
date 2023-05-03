@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kursovaya_1._0;
 
@@ -42,4 +44,10 @@ public partial class Worker
     public virtual ICollection<Sale> Sales { get; } = new List<Sale>();
 
     public virtual ICollection<Serviceworkersgraph> Serviceworkersgraphs { get; } = new List<Serviceworkersgraph>();
+
+    [NotMapped]
+    public string FIO { get
+        {
+            return Surname + " " + Name + " " + Patronymic;
+        } }
 }

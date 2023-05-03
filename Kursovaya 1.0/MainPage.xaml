@@ -301,7 +301,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="135"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -317,18 +317,22 @@
             <StackPanel Orientation="Horizontal" Height="auto">
 
 
-                <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#432818"/>
+                <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#292929"/>
 
                 <ComboBox Style="{DynamicResource ComboBoxStyle1}"  Height="25" Width="220" Margin="30 60 0 0" ItemsSource="{Binding SortingList}" SelectedIndex="{Binding SelectedSortNumber}"/>
-             
 
-                <Button Height="20" Width="20"  Margin="20 60 0 0" Click="TurnOver" />
 
+                <Button Height="30" Width="30"  Margin="20 60 0 0" Click="TurnOver" Background="Transparent" BorderThickness="0">
+                    <Image Source="Image/Reverse.png"/>
+                </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Поиск:" Margin="40 15 0 0" FontSize="12" Foreground="#432818"/>
-                <TextBox Height="25" Width="160" Margin="30 10 0 0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Поиск:" Margin="40 20 0 0" FontSize="12" Foreground="#292929"/>
+
+                <Border Height="35" Width="200" Margin="30 10 0 0" BorderBrush="#fff" BorderThickness="4" CornerRadius="10" >
+                    <TextBox Height="30" Width="200"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBox}" Tag="Поиск" Foreground="#292929" FontSize="13"/>
+                </Border>
             </StackPanel>
 
 
@@ -336,8 +340,10 @@
 
         <StackPanel Grid.Column="2" Width="auto" HorizontalAlignment="Left" Margin="107,0,0,0">
             <StackPanel Width="auto" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0">
-                <TextBlock Text="Фамилия ИмяИмя"  Margin="0 58 43 0" HorizontalAlignment="Right"/>
-                <Button Height="20" Width="20" Margin="0 45 55 0" HorizontalAlignment="Right" Click="Exit"/>
+                <TextBlock Text="{Binding Worker.FIO}"  Margin="0 58 43 0" HorizontalAlignment="Right"/>
+                <Button Height="30" Width="30" Margin="0 45 55 0" HorizontalAlignment="Right" Click="Exit" Background="Transparent" BorderThickness="0">
+                    <Image Source="Image/exit.png"/>
+                </Button>
             </StackPanel>
 
         </StackPanel>
@@ -412,10 +418,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.ColumnSpan="2" Height="50" Width="325" Content="Абонемент" Foreground="#432818" Padding="10 25 0 0" FontSize="16" FontWeight="Bold"  Background="#FFE1BB80" BorderThickness="2" BorderBrush="#8E5701"/>
+            <Border CornerRadius="10 0 0 0" BorderThickness="4" BorderBrush="#826AED" HorizontalAlignment="Right">
+                <Label Grid.Row="0" Grid.ColumnSpan="2" Height="50" Width="425" Content="Абонемент" Foreground="#fff"  FontSize="16" FontWeight="Bold"  Background="#826AED" Padding="10 15 0 0"  HorizontalAlignment="Right"/>
+            </Border>
 
-            <Border  Grid.Row="1" Grid.Column="0"  Width="325" BorderThickness="2 0 0 2" BorderBrush="#8E5701" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="2">
-                <Grid >
+
+            <Grid Grid.Row="1" Grid.Column="0"  Width="430"  Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="2"  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
@@ -427,31 +435,30 @@
 
 
                     <StackPanel  Grid.Column="0" Height="auto" Width="auto">
-                        <TextBlock Height="20" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="80" Text="Клиент: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="65" Width="80" Text="График: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="80" Text="Дата начала: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="80" Text="Статус: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="100" Text="Всего посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="130" Text="Осталось посещений: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="80" Text="Цена: " Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                        <TextBlock Height="25" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="80" Text="Клиент: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="65" Width="80" Text="График: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="80" Text="Дата начала: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="80" Text="Статус: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="130" Text="Всего посещений: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="170" Text="Осталось посещений: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="80" Text="Цена: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     </StackPanel>
                     <StackPanel  Grid.Column="1" Height="auto" Width="auto">
-                        <TextBlock Height="20" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" Text="{Binding Selected.ServiceTitle}"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.IdClientNavigation.SurName}" Margin="5 10 0 0" HorizontalAlignment="Left" />
-                        <ListBox Height="65" Width="160"  Margin="5 10 10  0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.DataStartView}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.Status}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.TotalVisits}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.UsedVisits}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
-                        <TextBlock Height="20" Width="170" Text="{Binding Selected.Price}" Margin="5 10 0 0" HorizontalAlignment="Left"/>
+                    <TextBlock Height="25" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" Text="{Binding Selected.ServiceTitle}" FontSize="14"/>
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.IdClientNavigation.SurName}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14" />
+                    <ListBox Height="65" Width="160"  Margin="5 10 10  0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}" />
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.DataStartView}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.Status}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14" />
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.TotalVisits}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.UsedVisits}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                    <TextBlock Height="25" Width="170" Text="{Binding Selected.Price}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     </StackPanel>
 
                     <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение" Click="Visit"/>
 
                 </Grid>
-            </Border>
-
+           
 
 
 

@@ -85,12 +85,12 @@
                                 <TextBlock Text="Пол: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#432818"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" >
-                                <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.SurName, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox  x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox  x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox  x:Name="Birthday" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox  x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Gender, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.SurName}"/>
+                                <TextBox  x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Name}"/>
+                                <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Patronymic}"/>
+                                <TextBox  x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.PhoneNumber}"/>
+                                <TextBox  x:Name="Birthday" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient}"/>
+                                <TextBox  x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditClient.Gender}"/>
                             </StackPanel>
 
                             <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="SaveNewClientInClientList" x:Name="SaveNewClient"/>

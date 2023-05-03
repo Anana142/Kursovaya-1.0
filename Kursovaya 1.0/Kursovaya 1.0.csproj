@@ -9,11 +9,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\Client.png" />
+    <None Remove="Image\CloseCircle.png" />
+    <None Remove="Image\Delete.png" />
+    <None Remove="Image\exit.png" />
+    <None Remove="Image\Restore.png" />
+    <None Remove="Image\Reverse.png" />
+    <None Remove="Image\search_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\Client.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\CloseCircle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Restore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Reverse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\search_.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

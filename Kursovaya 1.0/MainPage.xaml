@@ -32,7 +32,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                             </ControlTemplate>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -47,7 +47,8 @@
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="BlueViolet" Offset="0.0"/>    <!-- Меняет фон при наведении-->
+            <GradientStop Color="BlueViolet" Offset="0.0"/>
+            <!-- Меняет фон при наведении-->
             <GradientStop Color="BlueViolet" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#826AED"/>
@@ -202,7 +203,7 @@
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                   
+
                 </Trigger>
                 <Trigger Property="IsKeyboardFocusWithin" Value="true">
                     <Setter Property="Foreground" Value="Black"/>
@@ -213,7 +214,7 @@
                 </Trigger>
                 <Trigger Property="HasItems" Value="false">
                     <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
-                   
+
                 </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
@@ -259,7 +260,7 @@
                 </Trigger>
                 <Trigger Property="HasItems" Value="false">
                     <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
-                 </Trigger>
+                </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsGrouping" Value="true"/>
@@ -307,14 +308,14 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="212*"/>
+            
             <ColumnDefinition Width="633*"/>
             <ColumnDefinition Width="auto"/>
 
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Height="auto" Grid.Row="0" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" Height="auto">
+            <StackPanel Orientation="Horizontal" Height="auto" >
 
 
                 <TextBlock Text="Сортировать по: " Height="20" Margin="40 60 0 0" Foreground="#292929"/>
@@ -338,20 +339,17 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Width="auto" HorizontalAlignment="Left" Margin="107,0,0,0">
-            <StackPanel Width="auto" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0">
-                <TextBlock Text="{Binding Worker.FIO}"  Margin="0 58 43 0" HorizontalAlignment="Right"/>
-                <Button Height="30" Width="30" Margin="0 45 55 0" HorizontalAlignment="Right" Click="Exit" Background="Transparent" BorderThickness="0">
+                <Button Height="30" Width="30" Margin="0 45 55 0" HorizontalAlignment="Right" Click="Exit" Background="Transparent" BorderThickness="0" Grid.Column="3">
                     <Image Source="Image/exit.png"/>
                 </Button>
-            </StackPanel>
-
-        </StackPanel>
+            
 
 
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,50,20,10" Grid.ColumnSpan="2" Visibility="Visible" MinHeight="650" MaxWidth="1000" MinWidth="650" SelectedItem="{Binding Selected}" ItemsSource="{Binding ListSubscriptions}" Height="430"  x:Name="MyDataGrid" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff" BorderThickness="0"  >
-                <DataGrid.Effect >
-                    <DropShadowEffect BlurRadius = "20" 
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,50,100,10"  Visibility="Visible"
+                  MinHeight="650"  MinWidth="650" SelectedItem="{Binding Selected}" ItemsSource="{Binding ListSubscriptions}" Height="430" 
+                  x:Name="MyDataGrid" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff" BorderThickness="0"  >
+            <DataGrid.Effect >
+                <DropShadowEffect BlurRadius = "20" 
                     ShadowDepth = "5"
                     Direction = "15"
                     Color="Gray"
@@ -359,54 +357,54 @@
                  
                   
                         />
-                </DataGrid.Effect>
+            </DataGrid.Effect>
 
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell" >
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#DED7FF"/>
-                                <Setter Property="Foreground" Value="#292929"/>
-                                <Setter Property="BorderBrush" Value="Transparent"/>
-
-
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.CellStyle>
-
-                <DataGrid.Columns>
-
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#DED7FF"/>
+                            <Setter Property="Foreground" Value="#292929"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
 
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding IdClientNavigation.SurName}" Header="Фамилия Клиента"  Width="90*"/>
-                    <DataGridTextColumn Binding="{Binding ServiceTitle}" Header="Услуга"  Width="60*"/>
-                    <DataGridTemplateColumn Header="График"  Width="100*">
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
 
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ListBox ItemsSource="{Binding GraphicsView}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+            <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Status}" Header="Статус"  Width="60*" />
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="20*" >
 
 
-                    <DataGridTextColumn Binding="{Binding UsedVisits }" Header="Осталось посещений"   Width="90*" />
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding IdClientNavigation.SurName}" Header="Фамилия Клиента"  Width="90*"/>
+                <DataGridTextColumn Binding="{Binding ServiceTitle}" Header="Услуга"  Width="60*"/>
+                <DataGridTemplateColumn Header="График"  Width="100*">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox ItemsSource="{Binding GraphicsView}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Binding="{Binding Status}" Header="Статус"  Width="60*" />
+
+
+                <DataGridTextColumn Binding="{Binding UsedVisits }" Header="Осталось посещений"   Width="90*" />
 
 
 
-                </DataGrid.Columns>
-            </DataGrid>
-      
+            </DataGrid.Columns>
+        </DataGrid>
+
 
 
         <Button Height="36" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Grid.Row="2" VerticalAlignment="Center" Click="AddSub" Grid.RowSpan="2"/>
 
-        <Grid Grid.Row="1" Grid.Column="2"  Margin="0,50,0,0" Width="325" HorizontalAlignment="Center" >
+        <Grid Grid.Row="1" Grid.Column="2"  Margin="0,50,0,0" Width="370" HorizontalAlignment="Center" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
@@ -423,19 +421,19 @@
             </Border>
 
 
-            <Grid Grid.Row="1" Grid.Column="0"  Width="430"  Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="2"  >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="0"  Width="434"  Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="2"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
 
-                    <StackPanel  Grid.Column="0" Height="auto" Width="auto">
-                        <TextBlock Height="25" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
+                <StackPanel  Grid.Column="0" Height="auto" Width="auto" Margin="10 0 0 0 ">
+                    <TextBlock Height="25" Width="80" Text="Услуга: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="80" Text="Клиент: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="65" Width="80" Text="График: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="80" Text="Дата начала: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
@@ -443,22 +441,22 @@
                     <TextBlock Height="25" Width="130" Text="Всего посещений: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="170" Text="Осталось посещений: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="80" Text="Цена: " Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
-                    </StackPanel>
-                    <StackPanel  Grid.Column="1" Height="auto" Width="auto">
+                </StackPanel>
+                <StackPanel  Grid.Column="1" Height="auto" Width="auto">
                     <TextBlock Height="25" Width="170"  Margin="5 10 0 0" HorizontalAlignment="Left" Text="{Binding Selected.ServiceTitle}" FontSize="14"/>
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.IdClientNavigation.SurName}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14" />
-                    <ListBox Height="65" Width="160"  Margin="5 10 10  0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}" />
+                    <ListBox Height="65" Width="160"  Margin="5 10 10  0" HorizontalAlignment="Left" ItemsSource="{Binding Selected.GraphicsView}"  Background="#FBF5FF" BorderBrush="#826AED"/>
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.DataStartView}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.Status}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14" />
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.TotalVisits}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.UsedVisits}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.Price}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
-                    </StackPanel>
+                </StackPanel>
 
-                    <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение" Click="Visit"/>
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение" Click="Visit"/>
 
-                </Grid>
-           
+            </Grid>
+
 
 
 

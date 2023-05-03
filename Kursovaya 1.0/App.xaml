@@ -91,9 +91,9 @@
                 <Setter.Value>
                     <Grid>
                         <StackPanel>
-                            <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 0 0 0"/>
-                            <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
-                            <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                            <Rectangle Fill="#fff" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 0 0 0"/>
+                            <Rectangle Fill="#fff" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                            <Rectangle Fill="#fff" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
                         </StackPanel>
                     </Grid>
                 </Setter.Value>
@@ -166,7 +166,7 @@
         <Style x:Key="RightMenuElement" TargetType="{x:Type Border}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E1BB80"/>
+                    <Setter Property="Background" Value="#DED7FF"/>
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
             </Style.Triggers>
@@ -180,6 +180,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
             <Setter Property="Height" Value="45"/>
             <Setter Property="Background" Value="#826AED"/>

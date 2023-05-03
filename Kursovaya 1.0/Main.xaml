@@ -22,16 +22,16 @@
             <Button Height="15" Width="30" Margin="57 50 0 0" Style="{DynamicResource ButtonMenu}" VerticalAlignment="Top" Click="OpenMenuPanel"  HorizontalAlignment="Left" x:Name="ButtonMenuOpen"  Visibility="Visible">
                 <Grid>
                     <StackPanel>
-                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 0 0 0"/>
-                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
-                        <Rectangle Fill="#8E5701" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                        <Rectangle Fill="#826AED" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 0 0 0"/>
+                        <Rectangle Fill="#826AED" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
+                        <Rectangle Fill="#826AED" StrokeThickness="0" Width="20" Height="2" RadiusX="2" RadiusY="2" Margin="0 3 0 0"/>
                     </StackPanel>
                 </Grid>
             </Button>
 
         </Grid>
-        <DockPanel MaxWidth="250" HorizontalAlignment="Left" Panel.ZIndex="1" Background="White" x:Name="MenuPanel" Visibility="Collapsed" >
-            <Border BorderThickness="0 0 1 0" BorderBrush="#8E5701" >
+        <DockPanel MaxWidth="250" HorizontalAlignment="Left" Panel.ZIndex="1" Background="#826AED" x:Name="MenuPanel" Visibility="Collapsed" >
+            <Border BorderThickness="0 0 1 0"  >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -46,53 +46,53 @@
                     <StackPanel Grid.Row="1">
                             <Border Style="{DynamicResource RightMenuElement}">
                             <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="SubscriptionPageOpen">
-                                    <Label Content="Абонементы" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                    <Label Content="Абонементы" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
 
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="GraphPageOpen">
-                                    <Label Content="График" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="График" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
 
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="ClientPageOpen">
-                                    <Label Content="Клиенты" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Клиенты" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenworkerPage">
-                                    <Label Content="Менеджеры" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Менеджеры" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
                             <StackPanel Height="45" VerticalAlignment="Top" Width="250"  MouseLeftButtonDown="OpenSalePage" >
-                                    <Label Content="Продажи" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Продажи" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenTrainerPage">
-                                    <Label Content="Тренера" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Тренера" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{DynamicResource RightMenuElement}">
                             <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenServicePage">
-                                    <Label Content="Услуги" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Услуги" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
 
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenTrashPage">
-                                    <Label Content="Корзина" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Корзина" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
 
-                            <Rectangle Height="1" Width="250" Fill="#8E5701" Margin="0 10 0 0"/>
+                            <Rectangle Height="1" Width="250" Fill="#fff" Margin="0 10 0 0"/>
 
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" Margin="0 15 0 0">
-                                    <Label Content="Выйти" FontSize="15" Foreground="#432818" Margin="15 5 0 0 "/>
+                                <Label Content="Выйти" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>

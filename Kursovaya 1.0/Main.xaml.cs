@@ -134,5 +134,13 @@ namespace Kursovaya_1._0
             main.Show();
             this.Close();
         }
+
+        private void OpenStatisticPage(object sender, MouseButtonEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new StatisticsPage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
+        }
+
+        
     }
 }

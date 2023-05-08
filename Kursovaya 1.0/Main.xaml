@@ -88,13 +88,20 @@
                                 </StackPanel>
                             </Border>
 
-                            <Rectangle Height="1" Width="250" Fill="#fff" Margin="0 10 0 0"/>
+                            <Border Style="{DynamicResource RightMenuElement}">
+                                <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenStatisticPage">
+                                    <Label Content="Статистика" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
+                                </StackPanel>
+                            </Border>
+
+                        <Rectangle Height="1" Width="250" Fill="#fff" Margin="0 10 0 0"/>
 
                             <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" Margin="0 15 0 0" MouseLeftButtonDown="OpenMainWindow">
                                 <Label Content="Выйти" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
+                        
                         </StackPanel>
 
                    

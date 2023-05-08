@@ -328,13 +328,12 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Поиск:" Margin="40 20 0 0" FontSize="12" Foreground="#292929"/>
+          
 
-                <Border Height="35" Width="200" Margin="30 10 0 0" BorderBrush="#fff" BorderThickness="4" CornerRadius="10" >
+                <Border Height="35" Width="200" Margin="40 10 0 0" BorderBrush="#fff" BorderThickness="4" CornerRadius="10" HorizontalAlignment="Left">
                     <TextBox Height="30" Width="200"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBox}" Tag="Поиск" Foreground="#292929" FontSize="13"/>
                 </Border>
-            </StackPanel>
+           
 
 
         </StackPanel>

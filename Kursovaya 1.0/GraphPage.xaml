@@ -316,7 +316,7 @@
         </Grid>
 
        
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="10 25 30 0" Height="520" Grid.Row="1"  SelectedItem="{Binding SelectedGraph}"  VerticalAlignment="Top" HorizontalAlignment="Left"  
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="10 25 30 0" Height="600" Grid.Row="1"  SelectedItem="{Binding SelectedGraph}"  VerticalAlignment="Top" HorizontalAlignment="Left"  
                       ItemsSource="{Binding ListGraph}"  BorderThickness="0" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff" Grid.Column="0">
 
             <DataGrid.CellStyle>
@@ -395,7 +395,7 @@
                                 </StackPanel>
 
 
-                                <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="Save" x:Name="SaveNewClient"/>
+                                <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="Save" x:Name="SaveNewClient" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
                             </Grid>
                         </Border>
                     </Grid>

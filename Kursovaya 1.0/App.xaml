@@ -21,16 +21,16 @@
                                  Background="Transparent"
                                  Panel.ZIndex="2" 
                                  BorderThickness="0,0,0,2" 
-                                 Padding="0,0,0,2" BorderBrush="#8E5701"
-                                     Foreground="#432818"/>
+                                 Padding="0,0,0,2" BorderBrush="#292929"
+                                     Foreground="#292929"/>
                             <TextBox Text="{TemplateBinding Tag}" Background="Transparent" Panel.ZIndex="1"
-                                     BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="#8E5701">
+                                     BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="#292929">
                                 <TextBox.Style>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Foreground" Value="Transparent"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                                <Setter Property="Foreground" Value="#432818"/>
+                                                <Setter Property="Foreground" Value="#292929"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

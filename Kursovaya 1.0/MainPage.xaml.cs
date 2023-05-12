@@ -46,14 +46,35 @@ namespace Kursovaya_1._0
         {
             InitializeComponent();
 
+        
+
+
             Worker = worker;
             MyDataGrid.VerticalGridLinesBrush = new SolidColorBrush(Colors.Transparent);
             MyDataGrid.HorizontalGridLinesBrush = new SolidColorBrush(Colors.White);
            
             this.ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.Subscriptionservices).Include(s => s.Attendances).ToList();
 
+            foreach (var item in ListSubscriptions)
+            {
+                DateOnly data = (DateOnly)item.StartDate;
 
-            DataContext = this;
+                data = data.AddDays(item.IdPeriodNavigation.Duration);
+
+                string dataTime = DateTime.Now.ToString();
+
+                string[] dataAndTime = dataTime.Split(' ');
+
+                DateOnly datanow = DateOnly.Parse(dataAndTime[0]);
+
+                if (data < datanow || item.UsedVisits <= 0)
+                {
+                    item.Status = "Неактивен";
+                    DataBase.GetInstance().Subscriptions.Update(item);
+                    DataBase.GetInstance().SaveChanges();
+                }
+            }
+                DataContext = this;
 
             
         }
@@ -111,10 +132,9 @@ namespace Kursovaya_1._0
                     DataBase.GetInstance().SaveChanges();
 
                 }
+                Search();
 
-                ListSubscriptions = DataBase.GetInstance().Subscriptions.ToList();
-               
-            }
+              }
             
 
 

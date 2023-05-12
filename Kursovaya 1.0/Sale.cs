@@ -15,7 +15,7 @@ public partial class Sale
 
     public decimal? Sum { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateOnly Date { get; set; }
 
     public virtual Subscription? IdSubscriptionNavigation { get; set; }
 

@@ -34,7 +34,7 @@
 
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480"  Margin="10 25 30 0" Background="#fff" SelectedItem="{Binding SelectedWorker}" 
                   Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" 
-                  ItemsSource="{Binding ListWorker}" Height="560"  x:Name="WorkerGrid" >
+                  ItemsSource="{Binding ListWorker}" Height="700"  x:Name="WorkerGrid" >
             <DataGrid.Columns>
 
                 <DataGridTextColumn Binding="{Binding Surname}" Header="Фамилия" Width="50*" />
@@ -108,7 +108,7 @@
                         <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Email}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF" />
                             </StackPanel>
 
-                            <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="SaveNewWorkerInWorkerList" x:Name="SaveNewWorker"/>
+                    <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="SaveNewWorkerInWorkerList" x:Name="SaveNewWorker" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
                         </Grid>
                    
                 </Grid>

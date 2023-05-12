@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kursovaya_1._0.MainWindow" Background="#FFFBF5"
+﻿<Window x:Class="Kursovaya_1._0.MainWindow" Background="#FBF5FF"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -69,20 +69,20 @@
     <Grid>
 
         <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Авторизация" Foreground="#432818" FontSize="24" Width="155" FontWeight="Bold"/>
+            <TextBlock Text="Авторизация" Foreground="#292929" FontSize="24" Width="155" FontWeight="Bold"/>
             <TextBox Style="{DynamicResource placeHolder}" Tag="Введите логин"  Width="280" Height="25" Margin="0 80 0 80" Text="{Binding Login}" />
 
             <Grid>
                 <PasswordBox x:Name="PassBox" 
                              PasswordChanged="PasswordEdit" 
                              BorderThickness="0,0,0,2" 
-                             BorderBrush="#8E5701" 
+                             BorderBrush="#292929" 
                              Padding="0,0,0,2" Width="280" Height="25" Background="Transparent" 
                              Visibility="Hidden"
                              LostFocus="PasswordEdit"/>
                 <Label x:Name="PlaceholderPassLabel" 
                        Content="Введите пароль" 
-                       BorderThickness="0,0,0,2" BorderBrush="#8E5701" 
+                       BorderThickness="0,0,0,2" BorderBrush="#292929" 
                        Padding="0,0,0,2" Width="280" Height="25" Background="Transparent" 
                        MouseDown="PasswordVisible"/>
             </Grid>
@@ -90,12 +90,12 @@
                 <TextBlock Text="Неверный логин или пароль" HorizontalAlignment="Center" Foreground="#DC0000"/>
                 <TextBlock Text="Повторите попытку" HorizontalAlignment="Center" Foreground="#DC0000"/>
             </StackPanel>
-            
 
 
 
 
-            <Button Style="{DynamicResource ButtonRoundStyle}" x:Name ="MyButton" Content="Войти" Width="130" Height="35" Margin="0 80 0 0" BorderBrush="#FF8E5701" Background="#FFE1BB80" Foreground="#FF432818" Click="MyButton_Click" />
+
+            <Button Style="{DynamicResource ButtonRoundStyle}" x:Name ="MyButton" Content="Войти" Width="130" Height="35" Margin="0 80 0 0"  Background="#826AED" Foreground="#fff" Click="MyButton_Click" />
            
             
         </StackPanel>

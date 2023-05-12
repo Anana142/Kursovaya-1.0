@@ -14,15 +14,18 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="135"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="Статистика" FontSize="19" FontWeight="Bold" Foreground="#292929" Margin="10 45 0 0" HorizontalAlignment="Left" />
-        <Button Height="33" Width="33" HorizontalAlignment="Right" Grid.Column="1" Margin="0 45 35 0" Click="OpenMainPage" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" >
-            <Image Source="Image/exit.png" Height="30" Width="30"/>
-        </Button>
+        <Grid Grid.Row="0">
+            <Label Content="Статистика" FontSize="19" FontWeight="Bold" Foreground="#292929" Margin="10 45 0 0" HorizontalAlignment="Left" />
+            <Button Height="33" Width="33" HorizontalAlignment="Right" Grid.Column="1" Margin="0 45 35 0" Click="OpenMainPage" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" >
+                <Image Source="Image/exit.png" Height="30" Width="30"/>
+            </Button>
+        </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -36,6 +39,20 @@
                 <lvc:PieChart Series="{Binding SeriesPrice}"   LegendPosition="Left"    Background="#fff"/>
             </Border>
         </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Количество продаж за дни" HorizontalAlignment="Center" FontSize="15" FontWeight="SemiBold" Foreground="#292929" Margin="0 0 0 50" VerticalAlignment="Bottom"/>
+            <Border Grid.Row="2"  Height="250" Width="1100" BorderThickness="4" BorderBrush="#826AED" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <lvc:CartesianChart Series="{Binding Series}" YAxes="{Binding YAxes}" XAxes="{Binding XAxes}" LegendPosition="Hidden" Background="#826AED" Foreground="#fff"   />
+            </Border>
+        </Grid>
         
+
+       
+
     </Grid>
 </Page>

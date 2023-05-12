@@ -341,10 +341,10 @@
                 <Button Height="30" Width="30" Margin="0 45 55 0" HorizontalAlignment="Right" Click="Exit" Background="Transparent" BorderThickness="0" Grid.Column="3">
                     <Image Source="Image/exit.png"/>
                 </Button>
-            
 
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,50,100,10"  Visibility="Visible"
+
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,50,100,10" HeadersVisibility="Column"  Visibility="Visible"
                   MinHeight="650"  MinWidth="650" SelectedItem="{Binding Selected}" ItemsSource="{Binding ListSubscriptions}" Height="430" 
                   x:Name="MyDataGrid" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" Background="#fff" BorderThickness="0"  >
             <DataGrid.Effect >
@@ -401,7 +401,8 @@
 
 
 
-        <Button Height="36" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Grid.Row="2" VerticalAlignment="Center" Click="AddSub" Grid.RowSpan="2"/>
+        <Button Height="36" Width="170" HorizontalAlignment="Left" Content="Добавить абонимент" Grid.Row="2" 
+                VerticalAlignment="Center" Click="AddSub" Grid.RowSpan="2" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff"/>
 
         <Grid Grid.Row="1" Grid.Column="2"  Margin="0,50,0,0" Width="370" HorizontalAlignment="Center" >
             <Grid.ColumnDefinitions>
@@ -452,7 +453,8 @@
                     <TextBlock Height="25" Width="170" Text="{Binding Selected.Price}" Margin="5 10 0 0" HorizontalAlignment="Left" FontSize="14"/>
                 </StackPanel>
 
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение" Click="Visit"/>
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Height="35" Width="165" HorizontalAlignment="Left" Margin="5 40 0 10" Content="Добавить посещение"
+                        Click="Visit" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff"/>
 
             </Grid>
 

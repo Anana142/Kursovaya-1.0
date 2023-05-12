@@ -22,7 +22,7 @@
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" MinWidth="480" Margin="10 25 30 0"  
                   SelectedItem="{Binding SelectedSubscription}" Grid.Row="1" VerticalAlignment="Top" 
                   HorizontalAlignment="Left" ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle1}" 
-                  ItemsSource="{Binding ListSubscriptions}" Height="420" Background="#fff" >
+                  ItemsSource="{Binding ListSubscriptions}" Height="700" Background="#fff" >
             <DataGrid.Columns>
 
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="5*" />

@@ -40,6 +40,7 @@ namespace Kursovaya_1._0
         private Serviceworkersgraph selectedGraph;
         private List<Serviceworkersgraph> addGraphList = new List<Serviceworkersgraph>();
         private decimal price;
+        private int selectedIndexCombobox;
 
         public List<Client> ClientList { get => clientList; set { clientList = value; Signal(); } }
         public List<Service> ServiceList { get => serviceList; set { serviceList = value; Signal(); } }
@@ -54,9 +55,9 @@ namespace Kursovaya_1._0
         public Client AddClient { get => addClientName; set { addClientName = value; Signal(); } }
         public Service SelectedService { get => selectedService; set { selectedService = value; Signal(); } }
 
-        public Service AddSelectedService { get => addSelectedService; set { addSelectedService = value; Signal(); } }
+        public Service AddSelectedService { get => addSelectedService; set { addSelectedService = value; Signal(); DeleteGraph(); } }
         public Worker SelectedWorker { get => selectedWorker; set { selectedWorker = value; Signal(); } }
-        public Worker AddSelectedWorker { get => addSelectedWorker; set { addSelectedWorker = value; Signal(); } }
+        public Worker AddSelectedWorker { get => addSelectedWorker; set { addSelectedWorker = value; Signal(); DeleteGraph(); } }
 
         public Serviceworkersgraph SelectedGraph { get => selectedGraph; set { selectedGraph = value; Signal(); } }
         public List<Serviceworkersgraph> AddGraphList { get => addGraphList; set { addGraphList = value; Signal(); } }
@@ -64,7 +65,7 @@ namespace Kursovaya_1._0
         public string SearchText { get => searchText; set { searchText = value; Search(); } }
         public Client NewClient { get => newClient; set { newClient = value; Signal(); } }
         public string BirthdayNewClient { get => birthdayNewClient; set { birthdayNewClient = value; SpelledCorrectly(); Signal(); } }
-        public int SelectedIndexCombobox { get; set; }
+        public int SelectedIndexCombobox { get => selectedIndexCombobox; set { selectedIndexCombobox = value; DeleteGraph(); } }
         public Serviceworkersgraph RemoveFromListBox { get; set; }
         public decimal Price { get => price; set { price = value; Signal(); } }
         public Worker Worker { get; set; }
@@ -203,7 +204,7 @@ namespace Kursovaya_1._0
             else if (AddSelectedWorker != null)
             {
 
-                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdWorker == AddSelectedWorker.Id && s.IsDeleted != true).ToList(); 
+                swg = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdServiceNavigation).Where(s => s.IdWorker == AddSelectedWorker.Id && s.IsDeleted != true).ToList();
 
                 foreach (var serv in swg)
                 {
@@ -454,7 +455,7 @@ namespace Kursovaya_1._0
 
 
 
-                DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateTime.Now, Sum = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek });
+                DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateOnly.FromDateTime(DateTime.Now), Sum = (decimal)(AddSelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek });
                 DataBase.GetInstance().SaveChanges();
                 MessageBox.Show("Все ок!");
 
@@ -498,6 +499,12 @@ namespace Kursovaya_1._0
         private void DeleteWorker(object sender, RoutedEventArgs e)
         {
             AddSelectedWorker = null;
+        }
+
+        private void DeleteGraph()
+        {
+            AddGraphList = new List<Serviceworkersgraph>();
+            Signal(nameof(AddGraphList));
         }
     }
 }

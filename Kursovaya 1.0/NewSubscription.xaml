@@ -359,15 +359,15 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="ChooseClient"/>
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseService"/>
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseWorker"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 5 0 5" Click="ChooseClient" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#826AED" Background="#fff" Foreground="#826AED"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseService" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#826AED" Background="#fff" Foreground="#826AED"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="5 10 0 5" Click="ChooseWorker" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#826AED" Background="#fff" Foreground="#826AED"/>
 
                 </StackPanel>
                 
                 <StackPanel Grid.Column="2" Margin="10 30 0 0">
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="5 10 0 5" Click="DeleteService"/>
-                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="5 10 0 5" Click="DeleteWorker"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="5 10 0 5" Click="DeleteService" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#FF4646" Background="#fff" Foreground="#FF4646"/>
+                    <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="5 10 0 5" Click="DeleteWorker"  Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#FF4646" Background="#fff" Foreground="#FF4646"/>
                 </StackPanel>
             </Grid>
 
@@ -389,13 +389,15 @@
                 <Border BorderBrush="#fff" CornerRadius="10" BorderThickness="4" Height="25" Margin="0,1,0,10"  Width="160" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
                     <TextBlock Text="{Binding Price}" Background="#fff" />
                 </Border>
-                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="15,0,0,0" Click="ChooseGraph" x:Name="ButtonGraph" Visibility="Visible" VerticalAlignment="Top" Grid.Column="2"/>
-                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="15 ,30,0,0" Click="RemoveGraph" x:Name="RemoveGraphButton" Visibility="Collapsed" VerticalAlignment="Top" Grid.Column="2"/>
+                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Выбрать" FontSize="10" Margin="15,0,0,0" Click="ChooseGraph" x:Name="ButtonGraph" Visibility="Visible" VerticalAlignment="Top" Grid.Column="2" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#826AED" Background="#fff" Foreground="#826AED"/>
+                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Удалить" FontSize="10" Margin="15 ,30,0,0" Click="RemoveGraph" x:Name="RemoveGraphButton" Visibility="Collapsed" VerticalAlignment="Top" Grid.Column="2" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#FF4646" Background="#fff" Foreground="#FF4646"/>
             </Grid>
 
         </Grid>
 
-        <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddSubscription"/>
+        <Button Content="Сохранить" Grid.Column="0" Grid.Row="2" Height="35" Width="130" 
+                HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddSubscription"
+                Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
 
 
 
@@ -419,9 +421,9 @@
                 <Border Margin="35 35 0 0"  BorderThickness="1" BorderBrush="#826AED">
                     <TextBox Height="25" Width="160" VerticalAlignment="Top"   Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBox}" Tag="Поиск" Background="#FBF5FF"/>
                 </Border>
-                    
-                    
-                     <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Новый" FontSize="10" Margin="5 40 0 5" VerticalAlignment="Top" Click="AddNewClient"/>
+
+
+                <Button Height="20" Width="55" HorizontalAlignment="Left" Content="Новый" FontSize="10" Margin="5 40 0 5" VerticalAlignment="Top" Click="AddNewClient" Style="{DynamicResource ButtonRoundStyle}" BorderThickness="1" BorderBrush="#826AED" Background="#fff" Foreground="#826AED"/>
                 </StackPanel>
 
                 <DataGrid Grid.Row="2" Height="355" Width="420" Margin="0 40 0 0 " AutoGenerateColumns="False" IsReadOnly="True"
@@ -435,7 +437,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddClientName"/>
+            <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddClientName" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
 
             </Grid>
 
@@ -477,7 +479,7 @@
 
                 </Grid>
 
-                <Button Style="{DynamicResource ButtonRoundStyle}" Grid.Row="2" Content="Сохранить" Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" Click="AddNewClientInClientList" x:Name="SaveNewClient" />
+            <Button Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13" Grid.Row="2" Content="Сохранить" Width="130" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" Click="AddNewClientInClientList" x:Name="SaveNewClient" />
             </Grid>
 
 
@@ -510,7 +512,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddServiceTitle"/>
+            <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddServiceTitle" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
 
             </Grid>
 
@@ -548,7 +550,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddWorkerName"/>
+            <Button Grid.Row="3" Width="140" Height="35" Margin="40 15 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddWorkerName" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
 
             </Grid>
 

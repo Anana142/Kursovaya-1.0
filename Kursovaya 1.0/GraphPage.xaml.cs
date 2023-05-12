@@ -27,6 +27,7 @@ namespace Kursovaya_1._0
         private List<Graph> listGrapics;
         private Service selectedService;
         private Worker selectedWorker;
+        private Graph selectedGraphic;
 
         public Worker Worker { get; set; }
 
@@ -43,7 +44,7 @@ namespace Kursovaya_1._0
         public Worker AddSelectedWorker { get; set; }
 
         public List<Graph> ListGrapics { get { return listGrapics; } set => listGrapics = value; }
-        public Graph SelectedGraphic { get; set; }
+        public Graph SelectedGraphic { get => selectedGraphic; set { selectedGraphic = value; Signal(); } }
         public Graph AddSelectedSwg { get; set; }
 
         public GraphPage(Worker worker)
@@ -77,14 +78,6 @@ namespace Kursovaya_1._0
         {
             Navigation.GetInstance().CurrentPage = new MainPage(Worker);
         }
-
-        private void CloseNewClientPanel(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
-
         private void FillGraphicsList()
         {
             if (SelectedWorker != null && SelectedService != null)
@@ -107,15 +100,15 @@ namespace Kursovaya_1._0
 
         private void AddListGraph(object sender, MouseButtonEventArgs e)
         {
-           FillGraphicsList();
+            FillGraphicsList();
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if(SelectedWorker != null && SelectedService != null && SelectedGraphic != null)
+            if (SelectedWorker != null && SelectedService != null && SelectedGraphic != null)
             {
-                Serviceworkersgraph swg = new Serviceworkersgraph {IdService = SelectedService.Id, IdGraph = SelectedGraphic.Id, IdWorker = SelectedWorker.Id };   
-                
+                Serviceworkersgraph swg = new Serviceworkersgraph { IdService = SelectedService.Id, IdGraph = SelectedGraphic.Id, IdWorker = SelectedWorker.Id };
+
                 DataBase.GetInstance().Serviceworkersgraphs.Add(swg);
                 DataBase.GetInstance().SaveChanges();
 
@@ -125,10 +118,14 @@ namespace Kursovaya_1._0
                                                                   .Where(s => s.IsDeleted != true)
                                                                   .OrderBy(s => s.IdServiceNavigation.Title)
                                                                   .ThenBy(s => s.IdGraphNavigation).ToList();
-                Signal(nameof(ListGraph));  
 
+                Signal(nameof(ListGraph));
+
+                SelectedGraphic = new Graph();
+                SelectedWorker = new Worker();
+                SelectedService = new Service();
             }
-   
+
         }
 
         private void OpenPanel(object sender, RoutedEventArgs e)
@@ -145,7 +142,7 @@ namespace Kursovaya_1._0
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if(SelectedGraph != null)
+            if (SelectedGraph != null)
             {
                 SelectedGraph.IsDeleted = true;
                 DataBase.GetInstance().Serviceworkersgraphs.Update(SelectedGraph);
@@ -158,7 +155,7 @@ namespace Kursovaya_1._0
                                                                   .OrderBy(s => s.IdServiceNavigation.Title)
                                                                   .ThenBy(s => s.IdGraphNavigation).ToList();
 
-                Signal(nameof (ListGraph)); 
+                Signal(nameof(ListGraph));
             }
         }
 

@@ -62,7 +62,7 @@ public partial class Subscription
     public int UsedVisits
     {
         get
-        {   
+        {
             return TotalVisits - Attendances.Count;
         }
     }
@@ -85,4 +85,5 @@ public partial class Subscription
             return this.StartDate.ToString();
         }
     }
+
 }

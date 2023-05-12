@@ -126,7 +126,6 @@ public partial class SportclubContext : DbContext
 
             entity.HasIndex(e => e.IdWorker, "FK_sale_IdWorker2");
 
-            entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Sum).HasPrecision(10, 2);
 
             entity.HasOne(d => d.IdSubscriptionNavigation).WithMany(p => p.Sales)

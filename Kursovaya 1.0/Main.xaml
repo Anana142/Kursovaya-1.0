@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Kursovaya_1._0"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Title="Main" Height="720" Width="1280">
     <Grid>
         

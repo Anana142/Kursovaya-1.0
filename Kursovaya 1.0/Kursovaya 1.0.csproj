@@ -13,9 +13,16 @@
     <None Remove="Image\CloseCircle.png" />
     <None Remove="Image\Delete.png" />
     <None Remove="Image\exit.png" />
+    <None Remove="Image\logo.ico" />
     <None Remove="Image\Restore.png" />
     <None Remove="Image\Reverse.png" />
     <None Remove="Image\search_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

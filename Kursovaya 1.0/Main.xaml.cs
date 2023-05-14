@@ -31,6 +31,16 @@ namespace Kursovaya_1._0
 
             Navigation.GetInstance().CurrentPage = new MainPage(worker);
 
+            if(Worker.IdPost == 3 ) {
+                MenegerButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MenegerButton.Visibility = Visibility.Collapsed;
+                DeleteButton.Visibility = Visibility.Collapsed;
+            }
+
             DataContext = Navigation.GetInstance();
         }
 
@@ -141,6 +151,10 @@ namespace Kursovaya_1._0
             CloseMenu(ButtonMenuOpen, e);
         }
 
-        
+        private void OpenAdminPage(object sender, MouseButtonEventArgs e)
+        {
+            Navigation.GetInstance().CurrentPage = new AdministratorPage(Worker);
+            CloseMenu(ButtonMenuOpen, e);
+        }
     }
 }

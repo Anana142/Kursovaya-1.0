@@ -19,9 +19,9 @@ using System.Windows.Shapes;
 namespace Kursovaya_1._0
 {
     /// <summary>
-    /// Логика взаимодействия для TrainerPage.xaml
+    /// Логика взаимодействия для AdministratorPage.xaml
     /// </summary>
-    public partial class TrainerPage : Page, INotifyPropertyChanged
+    public partial class AdministratorPage : Page, INotifyPropertyChanged
     {
         public Worker Worker { get; set; }
 
@@ -33,11 +33,12 @@ namespace Kursovaya_1._0
         public List<Worker> ListWorker { get => listWorker; set { listWorker = value; Signal(); } }
         public string WorkerBirthDay { get => workerBirthDay; set { workerBirthDay = value; SpelledCorrectly(); Signal(); } }
         public Worker EditWorker { get; set; } = new Worker();
-        public TrainerPage(Worker worker)
+
+        public AdministratorPage(Worker worker)
         {
             InitializeComponent();
-
-            ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && (s.IsDeleted == null || s.IsDeleted == false)).ToList();
+            
+            ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 3).ToList();
             Worker = worker;
             DataContext = this;
         }
@@ -83,7 +84,8 @@ namespace Kursovaya_1._0
                 EditWorker.HomeNumber = SelectedWorker.HomeNumber;
                 EditWorker.FlatNumber = SelectedWorker.FlatNumber;
                 EditWorker.Email = SelectedWorker.Email;
-                EditWorker.IsDeleted = SelectedWorker.IsDeleted;
+                EditWorker.Login = SelectedWorker.Login;
+                EditWorker.Password = SelectedWorker.Password;
 
                 AddWorkerPanel.Visibility = Visibility.Visible;
 
@@ -102,18 +104,15 @@ namespace Kursovaya_1._0
         {
             if (SelectedWorker != null && SelectedWorker.Id > 0)
             {
-                SelectedWorker.IsDeleted = true;
-                DataBase.GetInstance().Workers.Update(SelectedWorker);
+                DataBase.GetInstance().Workers.Remove(SelectedWorker);
                 DataBase.GetInstance().SaveChanges();
+                ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 3).ToList();
 
-                ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && s.IsDeleted != true).ToList();
+                WorkerGrid.Items.Refresh();
+
+
             }
-
-            
-            
-            WorkerGrid.Items.Refresh();
         }
-              
 
         private void CloseNewWorkerPanel(object sender, RoutedEventArgs e)
         {
@@ -135,11 +134,9 @@ namespace Kursovaya_1._0
             if (EditWorker != null && WorkerBirthDay != "")
             {
                 EditWorker.Birthday = DateOnly.Parse(WorkerBirthDay);
-
                 if (EditWorker.Id == 0 && EditWorker.Name != null)
                 {
-                    EditWorker.IdPost = 2;
-                    EditWorker.IsDeleted = false;
+                    EditWorker.IdPost = 3;
 
                     DataBase.GetInstance().Workers.Add(EditWorker);
                     DataBase.GetInstance().SaveChanges();
@@ -148,33 +145,26 @@ namespace Kursovaya_1._0
                 }
                 else
                 {
-                    if (EditWorker.Name != null)
-                    {
-                        SelectedWorker.Id = EditWorker.Id;
-                        SelectedWorker.Surname = EditWorker.Surname;
-                        SelectedWorker.Name = EditWorker.Name;
-                        SelectedWorker.Patronymic = EditWorker.Patronymic;
-                        SelectedWorker.Birthday = EditWorker.Birthday;
-                        SelectedWorker.PhoneNumber = EditWorker.PhoneNumber;
-                        SelectedWorker.Gender = EditWorker.Gender;
-                        SelectedWorker.PassportDetails = EditWorker.PassportDetails;
-                        SelectedWorker.Street = EditWorker.Street;
-                        SelectedWorker.HomeNumber = EditWorker.HomeNumber;
-                        SelectedWorker.FlatNumber = EditWorker.FlatNumber;
-                        SelectedWorker.Email = EditWorker.Email;
+                    SelectedWorker.Id = EditWorker.Id;
+                    SelectedWorker.Surname = EditWorker.Surname;
+                    SelectedWorker.Name = EditWorker.Name;
+                    SelectedWorker.Patronymic = EditWorker.Patronymic;
+                    SelectedWorker.Birthday = EditWorker.Birthday;
+                    SelectedWorker.PhoneNumber = EditWorker.PhoneNumber;
+                    SelectedWorker.Gender = EditWorker.Gender;
+                    SelectedWorker.PassportDetails = EditWorker.PassportDetails;
+                    SelectedWorker.Street = EditWorker.Street;
+                    SelectedWorker.HomeNumber = EditWorker.HomeNumber;
+                    SelectedWorker.FlatNumber = EditWorker.FlatNumber;
+                    SelectedWorker.Email = EditWorker.Email;
+                    SelectedWorker.Login = EditWorker.Login;
+                    SelectedWorker.Password = EditWorker.Password;
 
-                        DataBase.GetInstance().Workers.Update(SelectedWorker);
-                        DataBase.GetInstance().SaveChanges();
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка :)");
-                    }
-                    
+                    DataBase.GetInstance().Workers.Update(SelectedWorker);
+                    DataBase.GetInstance().SaveChanges();
                 }
-                
-                ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && (s.IsDeleted == null || s.IsDeleted == false)).ToList();
+
+                ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 3).ToList();
 
                 EditWorker = new Worker();
                 WorkerBirthDay = "";

@@ -83,7 +83,7 @@ namespace Kursovaya_1._0
                     }
                     else
                     {
-                        if (SelectedService != null)
+                        if (SelectedService != null && SelectedService.Id != 0)
                         {
                            
                             SelectedService.Title = EditServise.Title;
@@ -113,7 +113,7 @@ namespace Kursovaya_1._0
 
         private void DeleteService(object sender, RoutedEventArgs e)
         {
-            if (SelectedService != null)
+            if (SelectedService != null && SelectedService.Id != 0 )
             {
                 SelectedService.IsDeleted = true;
                 DataBase.GetInstance().Update(SelectedService);
@@ -133,7 +133,7 @@ namespace Kursovaya_1._0
 
         private void EditNewServicePanel(object sender, RoutedEventArgs e)
         {
-            if (SelectedService != null)
+            if (SelectedService != null && SelectedService.Id != 0)
             {
                 EditServise.Id = SelectedService.Id;
                 EditServise.Title = SelectedService.Title;

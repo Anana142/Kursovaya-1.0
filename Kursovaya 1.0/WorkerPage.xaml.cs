@@ -51,6 +51,11 @@ namespace Kursovaya_1._0
 
         private void OpenNewWorkerPanel(object sender, RoutedEventArgs e)
         {
+            EditWorker = new Worker();
+            WorkerBirthDay = "";
+            Signal(nameof(EditWorker));
+            Signal(nameof(WorkerBirthDay));
+
             AddWorkerPanel.Visibility = Visibility.Visible;
 
             DoubleAnimation da = new DoubleAnimation();
@@ -63,7 +68,7 @@ namespace Kursovaya_1._0
 
         private void EditNewWorkerPanel(object sender, RoutedEventArgs e)
         {
-            if (SelectedWorker != null)
+            if (SelectedWorker != null && SelectedWorker.Id != 0)
             {
                 EditWorker.Id = SelectedWorker.Id;
                 EditWorker.Surname = SelectedWorker.Surname;
@@ -79,6 +84,8 @@ namespace Kursovaya_1._0
                 EditWorker.HomeNumber = SelectedWorker.HomeNumber;
                 EditWorker.FlatNumber = SelectedWorker.FlatNumber;
                 EditWorker.Email = SelectedWorker.Email;
+                EditWorker.Login = SelectedWorker.Login;    
+                EditWorker.Password = SelectedWorker.Password;  
 
                 AddWorkerPanel.Visibility = Visibility.Visible;
 
@@ -124,7 +131,7 @@ namespace Kursovaya_1._0
 
         private void SaveNewWorkerInWorkerList(object sender, RoutedEventArgs e)
         {
-            if (EditWorker != null &&  WorkerBirthDay != "")
+            if (EditWorker != null &&  WorkerBirthDay != "" )
             {
                 EditWorker.Birthday = DateOnly.Parse(WorkerBirthDay);
                 if (EditWorker.Id == 0 && EditWorker.Name != null)
@@ -150,6 +157,8 @@ namespace Kursovaya_1._0
                     SelectedWorker.HomeNumber = EditWorker.HomeNumber;  
                     SelectedWorker.FlatNumber = EditWorker.FlatNumber;  
                     SelectedWorker.Email = EditWorker.Email;
+                    SelectedWorker.Login = EditWorker.Login;
+                    SelectedWorker.Password = EditWorker.Password;  
 
                     DataBase.GetInstance().Workers.Update(SelectedWorker);
                     DataBase.GetInstance().SaveChanges();

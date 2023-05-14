@@ -63,6 +63,11 @@ namespace Kursovaya_1._0
 
         private void OpenNewClientPanel(object sender, RoutedEventArgs e)
         {
+            EditClient = new Client();
+            BirthdayNewClient = "";
+            Signal(nameof(BirthdayNewClient));
+            Signal(nameof(EditClient));
+
             AddClientPanel.Visibility = Visibility.Visible;
 
             DoubleAnimation da = new DoubleAnimation();
@@ -75,7 +80,7 @@ namespace Kursovaya_1._0
         }
         private void EditNewClientPanel(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient != null)
+            if (SelectedClient != null && SelectedClient.Id != 0)
             {
                 EditClient.Id = SelectedClient.Id;
                 EditClient.SurName = SelectedClient.SurName;
@@ -169,7 +174,7 @@ namespace Kursovaya_1._0
 
         private void DeleteClient(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient != null)
+            if (SelectedClient != null && SelectedClient.Id != 0)
             {
                 List<Subscription> subscriptions = DataBase.GetInstance().Subscriptions.Where(s => s.IdClient == SelectedClient.Id).ToList();
                 if (subscriptions.Count == 0)

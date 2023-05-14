@@ -18,11 +18,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid>
+            
             <Label Content="Статистика" FontSize="19" FontWeight="Bold" Foreground="#292929" Margin="10 45 0 0" HorizontalAlignment="Left" />
-            <Button Height="33" Width="33" HorizontalAlignment="Right" Grid.Column="1" Margin="0 45 35 0" Click="OpenMainPage" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" >
+            <Button Height="33" Width="33" HorizontalAlignment="Right" Grid.Column="1" Margin="0 45 35 0"  Grid.Row="0" Click="OpenMainPage" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" >
                 <Image Source="Image/exit.png" Height="30" Width="30"/>
             </Button>
+           <!-- <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Content="Период с : " FontSize="16" VerticalAlignment="Bottom" Margin="10 0 0 10" FontWeight="Medium"/>
+                <TextBox Width="100" Height="25" VerticalAlignment="Bottom" Margin="0 0 0 10" Background="Transparent" x:Name="Startdata" BorderBrush="#292929" BorderThickness="0 0 0 2" Text="{Binding FirstData}"/>
+                <Label Content="по : " FontSize="16" VerticalAlignment="Bottom" Margin="10 0 0 10" FontWeight="Medium"/>
+                <TextBox Width="100" Height="25" VerticalAlignment="Bottom" Margin="0 0 0 10" Background="Transparent" x:Name="Enddata" BorderBrush="#292929" BorderThickness="0 0 0 2" Text="{Binding LastData}"/>
+                <Button Content="Применить изменения" Width="200" Height="30" VerticalAlignment="Bottom" Margin="10 0 0 10"
+                        Background="#fff" FontSize="16" Style="{DynamicResource ButtonRoundStyle}" x:Name="ShowStatistic" Click="MakeStatistic"/>
+            </StackPanel> 
+            -->
+            
+
         </Grid>
 
         <Grid Grid.Row="1">
@@ -36,7 +48,7 @@
             </Border>
 
             <Border BorderThickness="4" CornerRadius="15" BorderBrush="#fff"  Height="280" Width="600" Grid.Column="1" VerticalAlignment="Top">
-                <lvc:PieChart Series="{Binding SeriesPrice}"   LegendPosition="Left"    Background="#fff"/>
+                <lvc:PieChart Series="{Binding SeriesPrice}"   LegendPosition="Left"  x:Name="statisticprice"  Background="#fff"/>
             </Border>
         </Grid>
 

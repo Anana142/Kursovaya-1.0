@@ -353,16 +353,15 @@
         </DataGrid>
       
         <DockPanel Width="470" Grid.Column="1 " Grid.Row="1" x:Name="GraphPanel" Visibility="Collapsed" Margin="20 25 0 0" >
+            <Button Height="30" Width="30" VerticalAlignment="Top" Margin="20 0 20 0" Click="ClosePanel" Background="Transparent" BorderThickness="0" Grid.Column="0">
+                <Image Source="Image/CloseCircle.png"/>
+            </Button>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="400"/>
                 </Grid.ColumnDefinitions>
-                <Button Height="30" Width="30" VerticalAlignment="Top" Margin="20 0 20 0" Click="ClosePanel" Background="Transparent" BorderThickness="0" Grid.Column="0">
-                    <Image Source="Image/CloseCircle.png"/>
-                </Button>
-
-                <Border Width="400" HorizontalAlignment="Right" Grid.Column="1">
+            <Border Width="400" HorizontalAlignment="Right" Grid.Column="1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -387,11 +386,11 @@
 
                                 <StackPanel Margin="10 20 0 0">
                                     <Label Content="Услуга:"/>
-                                    <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="300" ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedService}" DisplayMemberPath="Title"/>
+                                    <ComboBox x:Name="VonychiyCombobox1" Style="{DynamicResource ComboBoxStyle1}" Width="300" ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedService}" DisplayMemberPath="Title"/>
                                     <Label Content="Тренер:"/>
-                                    <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListWorker}" SelectedItem="{Binding SelectedWorker}" DisplayMemberPath="FIO" IsReadOnly="True" />
+                                    <ComboBox x:Name="VonychiyCombobox3" Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListWorker}" SelectedItem="{Binding SelectedWorker}" DisplayMemberPath="FIO" IsReadOnly="True" />
                                     <Label Content="Время:"/>
-                                    <ComboBox Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListGrapics}" SelectedItem="{Binding SelectedGraphic}" IsReadOnly="True" MouseDown="AddListGraph"/>
+                                    <ComboBox x:Name="VonychiyCombobox2" Width="300" Style="{DynamicResource ComboBoxStyle1}" ItemsSource="{Binding ListGrapics}" SelectedItem="{Binding SelectedGraphic}" IsReadOnly="True" MouseDown="AddListGraph"/>
                                 </StackPanel>
 
 

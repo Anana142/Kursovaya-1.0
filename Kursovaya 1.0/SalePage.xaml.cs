@@ -54,19 +54,7 @@ namespace Kursovaya_1._0
             Navigation.GetInstance().CurrentPage = new MainPage(Worker);
         }
 
-        private void DeleteSale(object sender, RoutedEventArgs e)
-        {
-            if (SelectedSale != null)
-            {
-                Subscription sub = DataBase.GetInstance().Subscriptions.FirstOrDefault(s => s.Id == SelectedSale.IdSubscription);
-
-                dataBase.DeleteSubscriotion(sub);   
-
-                ListSale = DataBase.GetInstance().Sales.ToList();
-            }
-        }
-
-        private void CloseSalePanel(object sender, RoutedEventArgs e)
+       private void CloseSalePanel(object sender, RoutedEventArgs e)
         {
             DoubleAnimation da = new DoubleAnimation();
             da.From = SalePanel.ActualWidth;

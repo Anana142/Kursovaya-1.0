@@ -80,7 +80,7 @@ namespace Kursovaya_1._0
         }
         private void FillGraphicsList()
         {
-            if (SelectedWorker != null && SelectedService != null)
+            if (SelectedWorker != null && SelectedService != null && SelectedWorker.Id != 0 && SelectedService.Id != 0)
             {
                 List<Graph> graphs = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdGraphNavigation).Where(s => s.IsDeleted != true && s.IdWorker == SelectedWorker.Id).Select(s => s.IdGraphNavigation).ToList();
 
@@ -121,9 +121,11 @@ namespace Kursovaya_1._0
 
                 Signal(nameof(ListGraph));
 
-                SelectedGraphic = new Graph();
-                SelectedWorker = new Worker();
-                SelectedService = new Service();
+                VonychiyCombobox1.SelectedIndex = -1;
+                VonychiyCombobox2.SelectedIndex = -1;
+                VonychiyCombobox3.SelectedIndex = -1;
+
+
             }
 
         }

@@ -39,12 +39,14 @@
                 <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="50*" />
                 <DataGridTextColumn Binding="{Binding Patronymic}" Header="Отчество" Width="50*" />
                 <DataGridTextColumn Binding="{Binding Birthday}" Header="Дата рождения" Width="60*" />
-                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Номер телефона" Width="60*"/>
-                <DataGridTextColumn Binding="{Binding Street }" Header="Улица" Width="60*"  />
+                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Номер телефона" Width="65*"/>
+                <DataGridTextColumn Binding="{Binding Street }" Header="Улица" Width="50*"  />
                 <DataGridTextColumn Binding="{Binding HomeNumber}" Header="Дом" Width="30*"/>
                 <DataGridTextColumn Binding="{Binding FlatNumber }" Header="Квартира" Width="40*"  />
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="60*"/>
-                
+                <DataGridTextColumn Binding="{Binding Login }" Header="Логин" Width="40*"  />
+                <DataGridTextColumn Binding="{Binding Password}" Header="Пароль" Width="50*"/>
+
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -61,39 +63,41 @@
             </Button>
 
             <Grid Width="350" HorizontalAlignment="Right" Background="#fff">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="#826AED" BorderThickness="4" CornerRadius="10 0 0 0">
+                    <Label Content="Сотрудник" Background="#826AED" Height="40" FontSize="20" FontWeight="SemiBold" Foreground="#fff" Padding="10 5 0 0"/>
+                </Border>
+
+
+                <Grid Margin="0 25 0 0 " Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border BorderBrush="#826AED" BorderThickness="4" CornerRadius="10 0 0 0">
-                        <Label Content="Сотрудник" Background="#826AED" Height="40" FontSize="20" FontWeight="SemiBold" Foreground="#fff" Padding="10 5 0 0"/>
-                    </Border>
 
-                    
-                    <Grid Margin="0 25 0 0 " Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-
-
-                            <StackPanel>
+                    <StackPanel>
                         <TextBlock Text="Фамилия: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Имя: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Отчество: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Телефон: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Дата рождения: " FontSize="15" Margin="10 10 0 10" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
-                       <TextBlock Text="Улица: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
+                        <TextBlock Text="Улица: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Дом: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Квартира: " FontSize="15" Margin="10 10 0 10" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
                         <TextBlock Text="Email: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" >
+                        <TextBlock Text="Логин: " FontSize="15" Margin="10 10 0 10" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
+                        <TextBlock Text="Пароль: " FontSize="15" Margin="10 10 0 10" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#292929"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" >
                         <TextBox  x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Surname}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
                         <TextBox  x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Name}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
                         <TextBox  x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Patronymic}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
@@ -103,13 +107,15 @@
                         <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.HomeNumber}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
                         <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.FlatNumber}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
                         <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Email}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
-                            </StackPanel>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Login}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
+                        <TextBox  Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding EditWorker.Password}" Style="{DynamicResource RoundTextBox}" Background="#FBF5FF"/>
+                    </StackPanel>
 
                     <Button Grid.Row="2" Grid.ColumnSpan="2" Height="35" Width="150" Content="Сохранить" HorizontalAlignment="Left" Margin="10 0 0 0 " Click="SaveNewWorkerInWorkerList" x:Name="SaveNewWorker" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
-                        </Grid>
-                  
                 </Grid>
-            
+
+            </Grid>
+
         </DockPanel>
 
 

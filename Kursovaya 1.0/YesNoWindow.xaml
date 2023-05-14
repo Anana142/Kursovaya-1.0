@@ -1,0 +1,27 @@
+﻿<Window x:Class="Kursovaya_1._0.YesNoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovaya_1._0"
+        mc:Ignorable="d"
+        Title="YesNoWindow" MaxHeight="250" MaxWidth="400" Height="250" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" Height="100" Width="300" TextWrapping="Wrap" TextAlignment="Center"/>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Height="25" Width="50"  Content="Нет" HorizontalAlignment="Center" Background="#fff" Margin="0 0 60 0" BorderBrush="#826AED" BorderThickness="2"  Style="{DynamicResource ButtonRoundStyle}" Foreground="#826AED"/>
+            <Button  Height="25" Width="50" Content="Да" HorizontalAlignment="Center" Grid.Column="1" Margin="60 0 0 0"
+                     Style="{DynamicResource ButtonRoundStyle}" Background="#fff" BorderBrush="#826AED" BorderThickness="2" Foreground="#826AED"/>
+        </Grid>
+    </Grid>
+</Window>

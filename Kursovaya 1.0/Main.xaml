@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
+        Icon="Image/logo.ico"
         Title="Main" Height="720" Width="1280">
     <Grid>
         
@@ -50,8 +51,12 @@
                                     <Label Content="Абонементы" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
-
-                            <Border Style="{DynamicResource RightMenuElement}">
+                        <Border Style="{DynamicResource RightMenuElement}"  x:Name="AdminButton">
+                            <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenAdminPage">
+                                <Label Content="Администраторы" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{DynamicResource RightMenuElement}">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="GraphPageOpen">
                                 <Label Content="График" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
@@ -62,12 +67,13 @@
                                 <Label Content="Клиенты" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
-                            <Border Style="{DynamicResource RightMenuElement}">
+                        <Border Style="{DynamicResource RightMenuElement}"  x:Name="MenegerButton">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenworkerPage">
                                 <Label Content="Менеджеры" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
                             </Border>
-                            <Border Style="{DynamicResource RightMenuElement}">
+                       
+                        <Border Style="{DynamicResource RightMenuElement}">
                             <StackPanel Height="45" VerticalAlignment="Top" Width="250"  MouseLeftButtonDown="OpenSalePage" >
                                 <Label Content="Продажи" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>
@@ -83,7 +89,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{DynamicResource RightMenuElement}">
+                            <Border Style="{DynamicResource RightMenuElement}" x:Name="DeleteButton">
                                 <StackPanel Height="45" VerticalAlignment="Top" Width="250" MouseLeftButtonDown="OpenTrashPage">
                                 <Label Content="Корзина" FontSize="15" Foreground="#fff" Margin="15 5 0 0 "/>
                                 </StackPanel>

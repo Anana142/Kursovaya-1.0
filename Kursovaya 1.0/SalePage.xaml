@@ -41,11 +41,7 @@
                 <DataGridTextColumn Binding="{Binding Sum}" Header="Цена" Width="60*" />
                 <DataGridTextColumn Binding="{Binding Date}" Header="Дата продажи" Width="60*" />
                 </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="удалить" Click="DeleteSale" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+            
         </DataGrid>
 
         <DockPanel Width="400" Grid.Column="1" Grid.Row="1" x:Name="SalePanel" Visibility="Collapsed">

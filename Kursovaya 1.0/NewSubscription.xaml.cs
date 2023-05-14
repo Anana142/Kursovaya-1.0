@@ -273,7 +273,7 @@ namespace Kursovaya_1._0
 
         private void AddNewClientInClientList(object sender, RoutedEventArgs e)
         {
-            if (NewClient != null)
+            if (NewClient != null && BirthdayNewClient != "")
             {
                 NewClient.Birthday = DateOnly.Parse(BirthdayNewClient);
 

@@ -37,4 +37,13 @@ public partial class Sale
             return "";
         }
     }
+
+    [NotMapped]
+    public string DateView
+    {
+        get
+        {
+            return this.Date.ToString("d");
+        }
+    }
 }

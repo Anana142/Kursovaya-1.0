@@ -113,7 +113,7 @@ namespace Kursovaya_1._0
 
         private void DeleteService(object sender, RoutedEventArgs e)
         {
-            if (SelectedService != null && SelectedService.Id != 0 )
+            if (SelectedService != null && SelectedService.Id != 0 && (bool)new YesNoWindow("Удалить запись?").ShowDialog())
             {
                 SelectedService.IsDeleted = true;
                 DataBase.GetInstance().Update(SelectedService);

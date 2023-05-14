@@ -406,7 +406,7 @@ namespace Kursovaya_1._0
                     CountWeek = PeriodList[SelectedIndexCombobox].Duration / 7;
                 }
 
-                Price = (decimal)(SelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek;
+                Price = (decimal)(SelectedService.PricePerHour) * AddGraphList.Count() * CountWeek;
                 Signal(nameof(Price));
 
             }
@@ -455,9 +455,9 @@ namespace Kursovaya_1._0
 
 
 
-                DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateOnly.FromDateTime(DateTime.Now), Sum = (decimal)(AddSelectedService.PricePerHour + 100) * AddGraphList.Count() * CountWeek });
+                DataBase.GetInstance().Sales.Add(new Sale() { IdSubscription = last.Id, IdWorker = Worker.Id, Date = DateOnly.FromDateTime(DateTime.Now), Sum = (decimal)(AddSelectedService.PricePerHour) * AddGraphList.Count() * CountWeek });
                 DataBase.GetInstance().SaveChanges();
-                MessageBox.Show("Все ок!");
+                MessageBox.Show("Абонемент добавлен");
 
                 AddClient = null;
                 AddGraphList = new List<Serviceworkersgraph>();

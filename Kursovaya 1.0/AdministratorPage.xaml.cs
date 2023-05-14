@@ -102,14 +102,14 @@ namespace Kursovaya_1._0
 
         private void Deleteworker(object sender, RoutedEventArgs e)
         {
-            if (SelectedWorker != null && SelectedWorker.Id > 0)
+            if (SelectedWorker != null && SelectedWorker.Id > 0 && (bool)new YesNoWindow("Удалить запись?").ShowDialog())
             {
                 DataBase.GetInstance().Workers.Remove(SelectedWorker);
                 DataBase.GetInstance().SaveChanges();
                 ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 3).ToList();
 
                 WorkerGrid.Items.Refresh();
-
+                CloseNewWorkerPanel(sender, e);
 
             }
         }

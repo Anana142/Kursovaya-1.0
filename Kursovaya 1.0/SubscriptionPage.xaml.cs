@@ -51,9 +51,14 @@ namespace Kursovaya_1._0
 
         private void DeleteSub(object sender, RoutedEventArgs e)
         {
-            dataBase.DeleteSubscriotion(SelectedSubscription);
-            ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.Attendances).Include(s => s.Subscriptionservices).ToList();
-
+            if (SelectedSubscription != null && SelectedSubscription.Id != 0)
+            {
+                if ((bool)new YesNoWindow("Удалить запись?").ShowDialog())
+                {
+                    SubscriptionExtension.DeleteSubscriotion(SelectedSubscription);
+                    ListSubscriptions = DataBase.GetInstance().Subscriptions.Include(s => s.IdClientNavigation).Include(s => s.IdPeriodNavigation).Include(s => s.Attendances).Include(s => s.Subscriptionservices).ToList();
+                }
+            }
         }
 
         private void OpenMainPage(object sender, RoutedEventArgs e)

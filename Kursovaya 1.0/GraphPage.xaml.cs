@@ -144,7 +144,7 @@ namespace Kursovaya_1._0
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (SelectedGraph != null)
+            if (SelectedGraph != null && SelectedGraph.Id != 0 && (bool)new YesNoWindow("Удалить запись?").ShowDialog())
             {
                 SelectedGraph.IsDeleted = true;
                 DataBase.GetInstance().Serviceworkersgraphs.Update(SelectedGraph);

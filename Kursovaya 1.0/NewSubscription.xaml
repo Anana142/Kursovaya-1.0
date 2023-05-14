@@ -469,12 +469,12 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" >
 
-                    <TextBox Background="#FBF5FF" BorderBrush="Black" Style="{DynamicResource RoundTextBox}" x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.SurName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Background="#FBF5FF" BorderBrush="Black" Style="{DynamicResource RoundTextBox}" x:Name="SurName" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.SurName}"/>
+                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Name" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Name}"/>
+                    <TextBox Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Patronymic" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Patronymic}"/>
+                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="PhoneNumber" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.PhoneNumber}"/>
                     <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Birthday" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding BirthdayNewClient, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Gender, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox  Background="#FBF5FF" Style="{DynamicResource RoundTextBox}" x:Name="Gender" Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding NewClient.Gender}"/>
                     </StackPanel>
 
                 </Grid>
@@ -585,7 +585,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Grid.Row="3" Width="140" Height="35" Margin="40 35 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddGraph"/>
+            <Button Grid.Row="3" Width="140" Height="35" Margin="40 35 0 0" HorizontalAlignment="Left" Content="Добавить" Click="AddGraph" Style="{DynamicResource  ButtonRoundStyle}" Background="#826AED" Foreground="#fff" FontSize="13"/>
 
             </Grid>
 

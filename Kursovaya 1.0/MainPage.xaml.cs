@@ -90,28 +90,32 @@ namespace Kursovaya_1._0
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            var windows = Application.Current.Windows.Cast<Window>().ToList();
-
-
-
-            foreach (var window in windows)
+            if ((bool)new YesNoWindow("Вы действительно хотите закрыть приложение?").ShowDialog())
             {
-                if (window == windows.Last())
+                var windows = Application.Current.Windows.Cast<Window>().ToList();
+
+
+
+                foreach (var window in windows)
                 {
-                    new MainWindow().Show();
-                    window.Close();
-                    break;
+                    if (window == windows.Last())
+                    {
+                        new MainWindow().Show();
+                        window.Close();
+                        break;
+                    }
+
+
+                    else
+                        window.Close();
                 }
-
-
-                else
-                    window.Close();
             }
         }
 
         private void Visit(object sender, RoutedEventArgs e)
         {
-            if (Selected != null)
+
+            if (Selected != null && (bool)new YesNoWindow("Добавить посещение?").ShowDialog())
             {
                 
                 if (Selected.UsedVisits > 0)

@@ -102,7 +102,7 @@ namespace Kursovaya_1._0
 
         private void Deleteworker(object sender, RoutedEventArgs e)
         {
-            if (SelectedWorker != null && SelectedWorker.Id > 0)
+            if (SelectedWorker != null && SelectedWorker.Id > 0 && (bool)new YesNoWindow("Удалить запись?").ShowDialog())
             {
                 DataBase.GetInstance().Workers.Remove(SelectedWorker);
                 DataBase.GetInstance().SaveChanges();       
@@ -110,8 +110,8 @@ namespace Kursovaya_1._0
 
                 WorkerGrid.Items.Refresh(); 
 
-
-            }
+              }
+            CloseNewWorkerPanel(sender, e); 
         }
 
         private void CloseNewWorkerPanel(object sender, RoutedEventArgs e)

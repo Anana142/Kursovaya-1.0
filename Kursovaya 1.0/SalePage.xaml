@@ -39,7 +39,7 @@
                 <DataGridTextColumn Binding="{Binding IdSubscription}" Header="Номер абонимента" Width="60*" />
                 <DataGridTextColumn Binding="{Binding IdWorkerNavigation.Surname}" Header="Фамилия Менеджера" Width="60*" />
                 <DataGridTextColumn Binding="{Binding Sum}" Header="Цена" Width="60*" />
-                <DataGridTextColumn Binding="{Binding Date}" Header="Дата продажи" Width="60*" />
+                <DataGridTextColumn Binding="{Binding DateView}" Header="Дата продажи" Width="60*" />
                 </DataGrid.Columns>
             
         </DataGrid>
@@ -111,7 +111,7 @@
                                     
                                     <StackPanel Grid.Column="1">
                                         <TextBlock   Margin="10 10 0 10" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding SelectedSale.IdWorkerNavigation.Surname}"  FontSize="15"/>
-                                        <TextBlock   Margin="10 10 0 8" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding SelectedSale.Date}"  FontSize="15"/>
+                                        <TextBlock   Margin="10 10 0 8" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding SelectedSale.DateView}"  FontSize="15"/>
                                         <TextBlock   Margin="10 10 0 8" Width="200" Height="25" HorizontalAlignment="Left" Text="{Binding SelectedSale.Sum}"  FontSize="15"/>
                                     </StackPanel>
 

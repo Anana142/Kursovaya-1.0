@@ -5,23 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursovaya_1._0"
         mc:Ignorable="d"
-        Title="YesNoWindow" MaxHeight="250" MaxWidth="400" Height="250" Width="400">
+        WindowStartupLocation="CenterScreen"
+        Icon="Image/logo.ico"
+        Title=" " MaxHeight="250" MaxWidth="400" Height="250" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" Height="100" Width="300" TextWrapping="Wrap" TextAlignment="Center"/>
+        <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" Height="100" Width="300" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
         <Grid  Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Height="25" Width="50"  Content="Нет" HorizontalAlignment="Center" Background="#fff" Margin="0 0 60 0" BorderBrush="#826AED" BorderThickness="2"  Style="{DynamicResource ButtonRoundStyle}" Foreground="#826AED"/>
-            <Button  Height="25" Width="50" Content="Да" HorizontalAlignment="Center" Grid.Column="1" Margin="60 0 0 0"
-                     Style="{DynamicResource ButtonRoundStyle}" Background="#fff" BorderBrush="#826AED" BorderThickness="2" Foreground="#826AED"/>
+            <Button Height="30" Width="70" FontSize="18"  Content="Нет" HorizontalAlignment="Center" Background="#fff" Margin="0 0 60 50" BorderBrush="#826AED" BorderThickness="2"  Style="{DynamicResource ButtonRoundStyle}" Foreground="#826AED" Click="NoButtonClick"/>
+            <Button  Height="30" Width="70" FontSize="18" Content="Да" HorizontalAlignment="Center" Grid.Column="1" Margin="60 0 0 50"
+                     Style="{DynamicResource ButtonRoundStyle}" Background="#fff" BorderBrush="#826AED" BorderThickness="2" Foreground="#826AED" Click="YesButtonClick"/>
         </Grid>
     </Grid>
 </Window>

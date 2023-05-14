@@ -142,137 +142,19 @@ namespace Kursovaya_1._0
 
             }
         }
-
-        private void DelAll(object sender, RoutedEventArgs e)
-        {
-            if (ServiceGrid.Visibility == Visibility.Visible)
-            {
-                if (SelectedService != null)
-                    ListService = new List<Service> { SelectedService };
+        private void DeleteService() {
+            
 
 
-                if (ListService.Count != 0)
-                {
-
-                    foreach (var service in ListService)
-                    {
-
-                        List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdService == service.Id).ToList();
-
-                        foreach (var item in s)
-                        {
-
-                            List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
-
-                            foreach (var i in ss)
-                            {
-                                List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id == i.IdSubscrirtion).ToList();
-
-                                if (sub.Count > 0)
-                                {
-                                    foreach (var y in sub)
-                                    {
-                                        dataBase.DeleteSubscriotion(y);
-                                        DataBase.GetInstance().SaveChanges();
-
-                                    }
-                                }
-                            }
-
-                            if (item.Id != 0)
-                            {
-
-                                DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
-                                DataBase.GetInstance().SaveChanges();
-                            }
-
-                        }
-                    }
-
-
-                    foreach (var item in ListService)
-                    {
-
-                        DataBase.GetInstance().Services.Remove(item);
-                        DataBase.GetInstance().SaveChanges();
-
-                    }
-
-                }
-
-                ListService = DataBase.GetInstance().Services.Where(s => s.IsDeleted == true).ToList();
-            }
-
-
-            else if (WorkerGrid.Visibility == Visibility.Visible)
+            if (ListService.Count != 0)
             {
 
-                if (SelectedWorker != null)
+                foreach (var service in ListService)
                 {
-                    ListWorker = new List<Worker> { SelectedWorker };
-                }
 
-                if (ListWorker.Count != 0)
-                {
-                    foreach (var worker in ListWorker)
-                    {
+                    List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdService == service.Id).ToList();
 
-                        List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdWorker == worker.Id).ToList();
-
-                        foreach (var item in s)
-                        {
-
-                            List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
-
-                            foreach (var i in ss)
-                            {
-                                List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id == i.IdSubscrirtion).ToList();
-
-                                if (sub.Count > 0)
-                                {
-                                    foreach (var y in sub)
-                                    {
-                                        dataBase.DeleteSubscriotion(y);
-                                        DataBase.GetInstance().SaveChanges();
-
-                                    }
-                                }
-
-                            }
-
-                            if (item.Id != 0)
-                            {
-                                DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
-                                DataBase.GetInstance().SaveChanges();
-                            }
-
-
-
-                        }
-
-                    }
-                    foreach (var item in ListWorker)
-                    {
-
-                        DataBase.GetInstance().Workers.Remove(item);
-                        DataBase.GetInstance().SaveChanges();
-
-                    }
-
-                    ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && s.IsDeleted == true).ToList();
-
-                }
-
-               
-                }
-            else if (GridGraph.Visibility == Visibility.Visible)
-            {
-                if (SelectedGraph != null)
-                    ListGraph = new List<Serviceworkersgraph> { SelectedGraph };
-
-                if (ListGraph.Count != 0)
-                {
-                    foreach (var item in ListGraph)
+                    foreach (var item in s)
                     {
 
                         List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
@@ -285,7 +167,59 @@ namespace Kursovaya_1._0
                             {
                                 foreach (var y in sub)
                                 {
-                                    dataBase.DeleteSubscriotion(y);
+                                    SubscriptionExtension.DeleteSubscriotion(y);
+                                    DataBase.GetInstance().SaveChanges();
+
+                                }
+                            }
+                        }
+
+                        if (item.Id != 0)
+                        {
+
+                            DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
+                            DataBase.GetInstance().SaveChanges();
+                        }
+
+                    }
+                }
+
+
+                foreach (var item in ListService)
+                {
+
+                    DataBase.GetInstance().Services.Remove(item);
+                    DataBase.GetInstance().SaveChanges();
+
+                }
+
+            }
+
+            ListService = DataBase.GetInstance().Services.Where(s => s.IsDeleted == true).ToList();
+        }
+        private void DeleteWorker()
+        {
+            if (ListWorker.Count != 0)
+            {
+                foreach (var worker in ListWorker)
+                {
+
+                    List<Serviceworkersgraph> s = DataBase.GetInstance().Serviceworkersgraphs.Where(s => s.IdWorker == worker.Id).ToList();
+
+                    foreach (var item in s)
+                    {
+
+                        List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
+
+                        foreach (var i in ss)
+                        {
+                            List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id == i.IdSubscrirtion).ToList();
+
+                            if (sub.Count > 0)
+                            {
+                                foreach (var y in sub)
+                                {
+                                    SubscriptionExtension.DeleteSubscriotion(y);
                                     DataBase.GetInstance().SaveChanges();
 
                                 }
@@ -298,15 +232,120 @@ namespace Kursovaya_1._0
                             DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
                             DataBase.GetInstance().SaveChanges();
                         }
+
+
+
                     }
-                    ListGraph = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation)
-                                                                .Include(s => s.IdServiceNavigation)
-                                                                .Include(s => s.IdGraphNavigation)
-                                                                .Where(s => s.IsDeleted == true)
-                                                                .OrderBy(s => s.IdServiceNavigation.Title).ThenBy(s => s.IdGraphNavigation).ToList();
-                    Signal(nameof(ListGraph));
 
                 }
+                foreach (var item in ListWorker)
+                {
+
+                    DataBase.GetInstance().Workers.Remove(item);
+                    DataBase.GetInstance().SaveChanges();
+
+                }
+
+                ListWorker = DataBase.GetInstance().Workers.Where(s => s.IdPost == 2 && s.IsDeleted == true).ToList();
+            }
+        }
+        private void DeleteGraph()
+        {
+            if (ListGraph.Count != 0)
+            {
+                foreach (var item in ListGraph)
+                {
+
+                    List<Subscriptionservice> ss = item.Subscriptionservices.ToList();
+
+                    foreach (var i in ss)
+                    {
+                        List<Subscription> sub = DataBase.GetInstance().Subscriptions.Where(s => s.Id == i.IdSubscrirtion).ToList();
+
+                        if (sub.Count > 0)
+                        {
+                            foreach (var y in sub)
+                            {
+                                SubscriptionExtension.DeleteSubscriotion(y);
+                                DataBase.GetInstance().SaveChanges();
+
+                            }
+                        }
+
+                    }
+
+                    if (item.Id != 0)
+                    {
+                        DataBase.GetInstance().Serviceworkersgraphs.Remove(item);
+                        DataBase.GetInstance().SaveChanges();
+                    }
+                }
+                ListGraph = DataBase.GetInstance().Serviceworkersgraphs.Include(s => s.IdWorkerNavigation)
+                                                            .Include(s => s.IdServiceNavigation)
+                                                            .Include(s => s.IdGraphNavigation)
+                                                            .Where(s => s.IsDeleted == true)
+                                                            .OrderBy(s => s.IdServiceNavigation.Title).ThenBy(s => s.IdGraphNavigation).ToList();
+                Signal(nameof(ListGraph));
+
+            }
+        }
+
+        private void DelAll(object sender, RoutedEventArgs e)
+        {
+            if (ServiceGrid.Visibility == Visibility.Visible)
+            {
+                if (SelectedService != null && SelectedService.Id != 0)
+                    ListService = new List<Service> { SelectedService };
+                if (ListService.Count > 1) {
+                    if((bool)new YesNoWindow("Удалить все?").ShowDialog())
+                        DeleteService();
+                } 
+                    
+                else if (ListService.Count == 1)
+                {
+                    if ((bool)new YesNoWindow("Удалить запись?").ShowDialog())
+                        DeleteService();
+                }
+                
+            }
+                
+                else if (WorkerGrid.Visibility == Visibility.Visible)
+                {
+
+                if (SelectedWorker != null && SelectedWorker.Id != 0)
+                {
+                    ListWorker = new List<Worker> { SelectedWorker };
+                }
+                if (ListWorker.Count > 1)
+                {
+                    if ((bool)new YesNoWindow("Удалить все?").ShowDialog())
+                        DeleteWorker();
+                }
+
+                else if (ListWorker.Count == 1)
+                {
+                    if ((bool)new YesNoWindow("Удалить запись?").ShowDialog())
+                        DeleteWorker();
+                }
+
+            }
+            else if (GridGraph.Visibility == Visibility.Visible)
+            {
+                if (SelectedGraph != null && SelectedGraph.Id != 0)
+                    ListGraph = new List<Serviceworkersgraph> { SelectedGraph };
+                if (ListGraph.Count > 1)
+                {
+                    if ((bool)new YesNoWindow("Удалить все?").ShowDialog())
+                        DeleteGraph();
+                }
+
+                else if (ListGraph.Count == 1)
+                {
+                    if ((bool)new YesNoWindow("Удалить запись?").ShowDialog())
+                        DeleteGraph();
+                }
+
+
             }
 
         }

@@ -56,11 +56,6 @@ namespace Kursovaya_1._0
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void OpenNewClientPanel(object sender, RoutedEventArgs e)
         {
             EditClient = new Client();
@@ -174,7 +169,7 @@ namespace Kursovaya_1._0
 
         private void DeleteClient(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient != null && SelectedClient.Id != 0)
+            if (SelectedClient != null && SelectedClient.Id != 0 && (bool)new YesNoWindow("Удалить запись?").ShowDialog())
             {
                 List<Subscription> subscriptions = DataBase.GetInstance().Subscriptions.Where(s => s.IdClient == SelectedClient.Id).ToList();
                 if (subscriptions.Count == 0)
@@ -186,7 +181,7 @@ namespace Kursovaya_1._0
                 {
                     foreach (Subscription sub in subscriptions)
                     {
-                        dataBase.DeleteSubscriotion(sub);
+                       SubscriptionExtension.DeleteSubscriotion(sub);
                     }
 
                     DataBase.GetInstance().Clients.Remove(SelectedClient);
@@ -195,6 +190,7 @@ namespace Kursovaya_1._0
                 }
 
                 ListClient = DataBase.GetInstance().Clients.ToList();
+                CloseNewClientPanel(sender, e);
             }
 
             

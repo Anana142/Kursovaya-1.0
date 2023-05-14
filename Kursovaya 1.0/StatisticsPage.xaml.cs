@@ -33,8 +33,7 @@ namespace Kursovaya_1._0
         public ISeries[] SeriesCount { get => seriesCount; set { seriesCount = value; Signal(); } }
         public ISeries[] SeriesPrice { get => seriesPrice; set { seriesPrice = value; Signal(); } }
 
-        public string FirstData { get => firstData; set { firstData = value;  } }
-        public string LastData { get => lastData; set { lastData = value;  } }
+       
         public ObservableCollection<ISeries> Series { get; set; }
         public List<Axis> YAxes { get; set; }
         public List<Axis> XAxes { get; set; }
@@ -56,14 +55,11 @@ namespace Kursovaya_1._0
             InitializeComponent();
 
             ServiceTitle = DataBase.GetInstance().Services.Where(s => s.IsDeleted != true).Select(s => s.Title).ToList();
-
-            FirstData = DataBase.GetInstance().Sales.FirstOrDefault().Date.ToString();
-            LastData = DataBase.GetInstance().Sales.OrderBy(s => s.Id).LastOrDefault().Date.ToString();
-
-            if (FirstData != null && LastData != null)
-            {
-                AddGraph();
-            }
+            
+            
+            
+            AddGraph();
+            
 
             // График продаж за день
 
@@ -134,25 +130,14 @@ namespace Kursovaya_1._0
 
                 SeriesCount = new ISeries[ServiceTitle.Count];
                 SeriesPrice = new ISeries[ServiceTitle.Count];
-                DateOnly firstdata = DateOnly.Parse(FirstData);
-                DateOnly lastdata = DateOnly.Parse(LastData);
+              
 
                 for (int i = 0; i < ServiceTitle.Count; i++)
                 {
 
                     List<Sale> sales = Sales.Where(s => s.IdSubscriptionNavigation.ServiceTitle == ServiceTitle[i]).ToList();
 
-                    List<Sale> sal = new List<Sale>();
-                    foreach (Sale s in sales)
-                    {
-                        if (s.Date >= firstdata && s.Date <= lastdata)
-                        {
-                            sal.Add(s);
-                        }
-
-                    }
-                    sales = sal;
-
+                    
                     int Count = sales.Count;
                     double Price = (double)sales.Sum(s => s.Sum);
 

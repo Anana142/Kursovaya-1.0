@@ -19,9 +19,26 @@ namespace Kursovaya_1._0
     /// </summary>
     public partial class YesNoWindow : Window
     {
-        public YesNoWindow()
+        public string Message { get; set; }
+        public YesNoWindow(string message)
         {
             InitializeComponent();
+            
+            Message = message;
+            
+            DataContext = this;
+        }
+
+        private void NoButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
+
+        private void YesButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

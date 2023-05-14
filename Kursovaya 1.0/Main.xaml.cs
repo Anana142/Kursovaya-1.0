@@ -34,11 +34,13 @@ namespace Kursovaya_1._0
             if(Worker.IdPost == 3 ) {
                 MenegerButton.Visibility = Visibility.Visible;
                 DeleteButton.Visibility = Visibility.Visible;
+                AdminButton.Visibility = Visibility.Visible;
             }
             else
             {
                 MenegerButton.Visibility = Visibility.Collapsed;
                 DeleteButton.Visibility = Visibility.Collapsed;
+                AdminButton.Visibility = Visibility.Collapsed;
             }
 
             DataContext = Navigation.GetInstance();

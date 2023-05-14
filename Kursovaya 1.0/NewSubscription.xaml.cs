@@ -101,14 +101,14 @@ namespace Kursovaya_1._0
                 if (AddSelectedWorker != null)
                 {
                     AddServiceList = ServiceList;
-                    var res = AddServiceList.Where(s => s.Title.Contains(SearchText));
+                    var res = AddServiceList.Where(s => s.Title.Contains(SearchText) && s.IsDeleted != true);
                     AddServiceList = res.ToList();
                     Signal(nameof(AddServiceList));
                 }
                 else if (AddSelectedWorker == null)
                 {
                     var result = DataBase.GetInstance().Services.
-                        Where(s => s.Title.Contains(SearchText));
+                        Where(s => s.Title.Contains(SearchText) && s.IsDeleted != true);
                     ServiceList = result.ToList();
                     AddServiceList = ServiceList;
                     Signal(nameof(AddServiceList));

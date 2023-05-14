@@ -73,9 +73,8 @@ namespace Kursovaya_1._0
             
                 if (EditServise != null)
                 {
-                    if (EditServise.Id == 0 && EditServise.Title != null)
-                    {
-
+                    if (EditServise.Id == 0 && EditServise.Title != null && EditServise.Description.Length < 250)
+                    {     
                         DataBase.GetInstance().Services.Add(EditServise);
                         DataBase.GetInstance().SaveChanges();
 
